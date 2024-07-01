@@ -38,9 +38,9 @@ To get started with porting the IR image to ROS2, guide: https://nvidia-isaac-ro
 - might not be worth it if we can just use ros1_bridge
 - Here is the overview with an example: https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_nitros_bridge/index.html
 ---
-
-Once NVMe is here, follow this guide:
-
-
-
 Some misc. notes for starting Orin development:
+1. Installed a new NVMe drive
+2. Used Nvidia's sdkmanager on another Ubuntu amd64 computer to flash and install runtime/sdk components to the Orin.
+- This video basically walks through it: https://www.youtube.com/watch?v=Ucg5Zqm9ZMk&t=90s
+- Sdkmanager download: https://developer.nvidia.com/sdk-manager
+3. Back on the Orin, sudo apt update && sudo apt upgrade
