@@ -64,4 +64,5 @@ Some misc. notes for starting Orin development:
         - And that is registers the GPG ket with isaa ros keys
     - Installed ros-humble-desktop (may not be needed, but also installed ros-dev-tools)
 7. Starting with the Intel Realsense D435i
-    - Download the realsense SDK 2.0 (V2.55.1)
+    - Download the realsense SDK 2.0: [https://www.intelrealsense.com/sdk-2/](https://github.com/IntelRealSense/librealsense/blob/master/doc/installation_jetson.md)
+    - Read over 2. and 3. , but didn't need to do anything until 4.
