@@ -46,15 +46,16 @@ Some misc. notes for starting Orin development:
 3. Back on the Orin, sudo apt update && sudo apt upgrade
 4. sudo pip3 install -U jetson-stats
 5. restart and run jtop
-  - Just housekeeping libraries and other stats
-  -   CUDA: 12.2.140
-  -   cuDNN: 8.9.4.25
-  -   TensorRT: 8.6.2.3
-  -   VPI: 3.1.5
-  -   Vulkan: 1.3.204
-  -   OpenCV: 4.8.0 with CUDA: NO
-  -   Jetpack: 6.0
-  -   Distr: Ubuntu 22.04 Jammy Jellyfish
-  -   Python: 3.10.12
-  -   L4t: 36.3.0
-  -   Interfaces: 192.168.1.178, docker0: 172.17.0.1
+    - Just housekeeping libraries and other stats
+    -   CUDA: 12.2.140
+    -   cuDNN: 8.9.4.25
+    -   TensorRT: 8.6.2.3
+    -   VPI: 3.1.5
+    -   Vulkan: 1.3.204
+    -   OpenCV: 4.8.0 with CUDA: NO
+    -   Jetpack: 6.0
+    -   Distr: Ubuntu 22.04 Jammy Jellyfish
+    -   Python: 3.10.12
+    -   L4t: 36.3.0
+    -   Interfaces: 192.168.1.178, docker0: 172.17.0.1
+6. Downloading ROS2 Humble: https://nvidia-isaac-ros.github.io/getting_started/isaac_apt_repository.html
