@@ -66,3 +66,11 @@ Some misc. notes for starting Orin development:
 7. Starting with the Intel Realsense D435i
     - Download the realsense SDK 2.0: [https://www.intelrealsense.com/sdk-2/](https://github.com/IntelRealSense/librealsense/blob/master/doc/installation_jetson.md)
     - Read over 2. and 3. , but didn't need to do anything until 4.
+
+
+---
+Things presumably optimized for the Jetson
+- Base image from Nvidia's SDKmanager
+- Realsense
+
+https://www.intel.com/content/dam/support/us/en/documents/emerging-technologies/intel-realsense-technology/Intel-RealSense-SDK2-Github-Guide.pdf
