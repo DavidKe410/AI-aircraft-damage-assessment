@@ -59,3 +59,9 @@ Some misc. notes for starting Orin development:
     -   L4t: 36.3.0
     -   Interfaces: 192.168.1.178, docker0: 172.17.0.1
 6. Downloading ROS2 Humble: https://nvidia-isaac-ros.github.io/getting_started/isaac_apt_repository.html
+    - Difference from standard installation: https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
+        - Is that it also installs gnupg and wget, but these are already included.
+        - And that is registers the GPG ket with isaa ros keys
+    - Installed ros-humble-desktop (may not be needed, but also installed ros-dev-tools)
+7. Starting with the Intel Realsense D435i
+    - Download the realsense SDK 2.0 (V2.55.1)
