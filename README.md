@@ -44,3 +44,17 @@ Some misc. notes for starting Orin development:
 - This video basically walks through it: https://www.youtube.com/watch?v=Ucg5Zqm9ZMk&t=90s
 - Sdkmanager download: https://developer.nvidia.com/sdk-manager
 3. Back on the Orin, sudo apt update && sudo apt upgrade
+4. sudo pip3 install -U jetson-stats
+5. restart and run jtop
+  - Just housekeeping libraries and other stats
+  -   CUDA: 12.2.140
+  -   cuDNN: 8.9.4.25
+  -   TensorRT: 8.6.2.3
+  -   VPI: 3.1.5
+  -   Vulkan: 1.3.204
+  -   OpenCV: 4.8.0 with CUDA: NO
+  -   Jetpack: 6.0
+  -   Distr: Ubuntu 22.04 Jammy Jellyfish
+  -   Python: 3.10.12
+  -   L4t: 36.3.0
+  -   Interfaces: 192.168.1.178, docker0: 172.17.0.1
