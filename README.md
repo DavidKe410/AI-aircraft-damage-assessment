@@ -64,8 +64,11 @@ Some misc. notes for starting Orin development:
         - And that is registers the GPG ket with isaa ros keys
     - Installed ros-humble-desktop (may not be needed, but also installed ros-dev-tools)
 7. Starting with the Intel Realsense D435i
-    - Download the realsense SDK 2.0: [https://www.intelrealsense.com/sdk-2/](https://github.com/IntelRealSense/librealsense/blob/master/doc/installation_jetson.md)
-    - Read over 2. and 3. , but didn't need to do anything until 4.
+    - At this moment, there is no complete support for the D435i with the JEtpack 6 installation
+    -   However, they have added support for JP6.0 with the D457 MIPI
+    -   We can use this to allow for full functionality with the D435i
+    -     First follow this guide: https://github.com/IntelRealSense/realsense_mipi_platform_driver/tree/dev
+    -     This one has simiar details: https://github.com/IntelRealSense/realsense_mipi_platform_driver?tab=readme-ov-file
 
 
 ---
