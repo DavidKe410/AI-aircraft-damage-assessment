@@ -71,6 +71,14 @@ Some misc. notes for starting Orin development:
     -     This one has simiar details: https://github.com/IntelRealSense/realsense_mipi_platform_driver?tab=readme-ov-file
 
 need to download : sudo apt install python3-colcon-common-extensions ...
+
+run sudo docker run -it --entrypoint=/bin/bash nitros_bridge to command line into it
+
+figuring out things
+
+workspaces/isaac_ros_1-dev/src/isaac_ros_nitros_bridge/ros1/isaac_ros_nitros_bridge_ros1/launch
+
+
 ---
 Things presumably optimized for the Jetson
 - Base image from Nvidia's SDKmanager
