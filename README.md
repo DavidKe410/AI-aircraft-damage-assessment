@@ -70,7 +70,7 @@ Some misc. notes for starting Orin development:
     -     First follow this guide: https://github.com/IntelRealSense/realsense_mipi_platform_driver/tree/dev
     -     This one has simiar details: https://github.com/IntelRealSense/realsense_mipi_platform_driver?tab=readme-ov-file
 
-
+need to download : sudo apt install python3-colcon-common-extensions ...
 ---
 Things presumably optimized for the Jetson
 - Base image from Nvidia's SDKmanager
