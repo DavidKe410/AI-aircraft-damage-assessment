@@ -114,13 +114,21 @@ Some misc. notes for starting Orin development:
      - Took some time to understand a couple of files in the Issac ROS bridge, now will try running the entrypoint.sh with correct parameters and the FLIR Ir running manually
             - Navigate to: /workspaces/isaac_ros_1-dev/src/isaac_ros_nitros_bridge/scripts
             - sudo chmod +x nitros-bridge-entrypoint.sh isaac_ros_nitros_bridge_ros1.py 
+            - then ran ./nitros-bridge-entrypoint.sh nitros_bridge_image_converter.yaml nitros_bridge_image_converter.launch "/flir_boson/image_raw" "/ros1_output_image"
+                  - within the same directory: /workspaces/isaac_ros_1-dev/src/isaac_ros_nitros_bridge/scripts
+            - same error though
 
-
-
-
-/workspaces/isaac_ros_1-dev/src/isaac_ros_nitros_bridge/scripts$ ./nitros-bridge-entrypoint.sh nitros_bridge_image_converter.yaml nitros_bridge_image_converter.launch "/flir_boson/image_raw" "/ros1_output_image"
-
-
+     - Think its a problem with GLIBC_2.34 primarily. Asked Chat GPT and this is the fix it gave but also said its super risky
+sudo apt update && sudo apt upgrade && sudo apt install gawk bison
+wget http://ftp.gnu.org/gnu/libc/glibc-2.34.tar.gz
+tar -xzf glibc-2.34.tar.gz
+cd glibc-2.34
+mkdir build
+cd build
+../configure --prefix=/opt/glibc-2.34
+make -j4
+sudo make install
+export LD_LIBRARY_PATH=/opt/glibc-2.34/lib:$LD_LIBRARY_PATH
 
 
 7. Starting with the Intel Realsense D435i
