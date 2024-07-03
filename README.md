@@ -69,6 +69,11 @@ Some misc. notes for starting Orin development:
 7. Starting with the Arducam ToF
     - Simply followed the online Arducam ToF guide:
     - Make sure to source humble before colcon building
+8. Moving onto getting the FLIR IR camera working within a Noetic docker and getting the ISAAC ROS bridge to work
+    - Followed this guide to first create the container:
+        - I also: mkdir -p ~/workspaces/ros1_ws/flir_ir/src
+        - Entered it and cloned the flir IR ros wrapper
+        - Then built the docker regularily
 7. Starting with the Intel Realsense D435i
     - At this moment, there is no complete support for the D435i with the JEtpack 6 installation
     -   However, they have added support for JP6.0 with the D457 MIPI
