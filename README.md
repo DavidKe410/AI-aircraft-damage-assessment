@@ -66,6 +66,9 @@ Some misc. notes for starting Orin development:
         - And that is registers the GPG ket with isaac ros keys
     - Installed development tools and ROS tools (common packages) and python3 flake/pytest packages according to the official ros humble docs
     - Installed ros-humble-desktop-full (may not be needed, but also installed ros-dev-tools)
+7. Starting with the Arducam ToF
+    - Simply followed the online Arducam ToF guide:
+    - Make sure to source humble before colcon building
 7. Starting with the Intel Realsense D435i
     - At this moment, there is no complete support for the D435i with the JEtpack 6 installation
     -   However, they have added support for JP6.0 with the D457 MIPI
