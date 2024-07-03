@@ -103,6 +103,15 @@ Some misc. notes for starting Orin development:
                    - jsut change the default device to video1 instead of video0
                    - Other changes can be done here, but nothing too important. I'm not sure the yaml calibration is even used though its linked
              - huh thought there was more, but it was just that I guess
+    - Now moving to getting the bridge to work for us. Error when you run their docker run command :
+
+++--++
+[ERROR] [1720027747.649430812]: Failed to load nodelet [/ImageConverterNode] of type [isaac_ros_nitros_bridge_ros1/ImageConverterNode] even after refreshing the cache: Failed to load library /workspaces/isaac_ros_1-dev/install_isolated/lib//libisaac_ros_nitros_bridge_ros1.so. Make sure that you are calling the PLUGINLIB_EXPORT_CLASS macro in the library code, and that names are consistent between this macro and your XML. Error string: Could not load library (Poco exception = /lib/aarch64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found (required by /usr/lib/aarch64-linux-gnu/nvidia/libnvrm_gpu.so))
+[ERROR] [1720027747.649560256]: The error before refreshing the cache was: Failed to load library /workspaces/isaac_ros_1-dev/install_isolated/lib//libisaac_ros_nitros_bridge_ros1.so. Make sure that you are calling the PLUGINLIB_EXPORT_CLASS macro in the library code, and that names are consistent between this macro and your XML. Error string: Could not load library (Poco exception = /lib/aarch64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found (required by /usr/lib/aarch64-linux-gnu/nvidia/libnvrm_gpu.so))
+[FATAL] [1720027747.651327861]: Failed to load nodelet '/ImageConverterNode` of type `isaac_ros_nitros_bridge_ros1/ImageConverterNode` to manager `standalone_nodelet'
+++--++
+
+
 
 7. Starting with the Intel Realsense D435i
     - At this moment, there is no complete support for the D435i with the JEtpack 6 installation
