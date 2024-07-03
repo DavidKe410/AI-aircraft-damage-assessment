@@ -70,7 +70,7 @@ Some misc. notes for starting Orin development:
     - Simply followed the online Arducam ToF guide:
     - Make sure to source humble before colcon building
     - source Arducam_tof_camera/ros2_publisher/install/setup.bash
-          - when launching
+          - when running: ros2 run arducam tof_pointcloud
 8. Moving onto getting the FLIR IR camera working within a Noetic docker and getting the ISAAC ROS bridge to work
     - Followed this guide to first create the container:https://nvidia-isaac-ros.github.io/concepts/nitros_bridge/setup_ros1_docker.html
         - Then followed the build command included
