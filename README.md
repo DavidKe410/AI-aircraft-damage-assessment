@@ -84,7 +84,10 @@ figuring out things
 
 workspaces/isaac_ros_1-dev/src/isaac_ros_nitros_bridge/ros1/isaac_ros_nitros_bridge_ros1/launch
 
-
+---
+Arducam ToF seems to take video0, FLIR IR seems to take video1 and video2
+Realsense seems to take video3 to video8
+Unless plugged in in a different order with flir taking 7 and 8 and realsense taking 1 to 6
 ---
 Things presumably optimized for the Jetson
 - Base image from Nvidia's SDKmanager
