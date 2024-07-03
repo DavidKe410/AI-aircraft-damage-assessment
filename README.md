@@ -71,13 +71,11 @@ Some misc. notes for starting Orin development:
     - Make sure to source humble before colcon building
 8. Moving onto getting the FLIR IR camera working within a Noetic docker and getting the ISAAC ROS bridge to work
     - Followed this guide to first create the container:https://nvidia-isaac-ros.github.io/concepts/nitros_bridge/setup_ros1_docker.html
-        ----------------------- I also: mkdir -p ~/workspaces/ros1_ws/flir_ir/src
-        - Entered it and cloned the flir IR ros wrapper: https://github.com/astuff/flir_boson_usb----------------------------
         - Then followed the build command included
     - Before continuining with the guide here and running its built in entrypoint: https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_nitros_bridge/index.html
         - make sure the flir camera is plugged in so that there is a video1
         - Run the container with /bin/bash as the entrypoint: "sudo docker run -it --cap-add=SYS_PTRACE --privileged --network host --pid host --runtime nvidia -v /dev:/dev --entrypoint=/bin/bash --rm --name nitros_bridge nitros_bridge:latest"
-             - Can switch out the -v /dev:/dev with "--device /dev/video1" if you want to be mroe secure, but does not allow dynamic plug/plugging, so just make sure everything is plugged in and stays in.
+             - Can switch out the -v /dev:/dev with "--device /dev/video1" if you want to be mroe secure, but does not allow dynamic plug/unplug, so just make sure everything is plugged in and stays in.
         - Treat it like any other system: start with cd && sudo apt update && sudo apt upgrade
         - Then "sudo rosdep init" and "rosdep update"
         - Then moving onto the flir ir wrapper
@@ -90,11 +88,19 @@ Some misc. notes for starting Orin development:
              - cd .. && source flir_ir/devel/setup.bash
              - check usb video with ls /dev/video*
              - roslaunch flir_boson_usb flir_boson.launch
+                    - Unfortunately, the flir_boson_rectified.launch is nonfunctional due to problems with using nodelets: "[ERROR] [1720023405.952799862]: Failed to load nodelet [/flir_boson/boson_camera_nodelet_manager_image_proc] of type [image_proc/rectify] even after refreshing the cache: According to the loaded plugin descriptions the class image_proc/rectify with base class type nodelet::Nodelet does not exist. Declared types are  flir_boson_usb/BosonCamera..."
+                    - simply not worth it to debug on our timeline, since we can image process after bridging to ROS2
         - In another terminal on host system:
              - "sudo docker ps" to get container ID 
              - "sudo docker exec -it <container_ID> bash" to open another terminal in the docker container
              - cd && source /opt/ros/noetic/setup.bash
              - "rostopic list" and you should see /flir_boson/camera_info and /flir_boson/image_raw
+        - Moving onto some quick deconfliction and reconfiguring of the default package values
+             - Navigate to the launch file: cd flir_ir/src/flir_boson_usb/launch
+             - Use "vi flir_boson.launch" to enter the file; Type "i" to start insterting and then ":wq" to save and exit
+                   - jsut change the default device to video1 instead of video0
+                   - Other changes can be done here, but nothing too important. I'm not sure the yaml calibration is even used though its linked
+             - huh thought there was more, but it was just that I guess
 
 7. Starting with the Intel Realsense D435i
     - At this moment, there is no complete support for the D435i with the JEtpack 6 installation
