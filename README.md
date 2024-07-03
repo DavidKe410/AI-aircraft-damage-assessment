@@ -75,7 +75,8 @@ Some misc. notes for starting Orin development:
         - Entered it and cloned the flir IR ros wrapper: https://github.com/astuff/flir_boson_usb
         - Then followed the build command included
     - Before continuining with the guide here and running its built in entrypoint: https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_nitros_bridge/index.html
-        - Run the container with /bin/bash as the entrypoint: "docker run -it --cap-add=SYS_PTRACE --privileged --network host --pid host --runtime nvidia --device /dev/video0 --name nitros_bridge --entrypoint=/bin/bash --rm nitros_bridge:latest"
+        - Run the container with /bin/bash as the entrypoint: "sudo docker run -it --cap-add=SYS_PTRACE --privileged --network host --pid host --runtime nvidia --device /dev/video1 --entrypoint=/bin/bash --rm --name nitros_bridge nitros_bridge:latest"
+        - Treat it like any other system: start with cd && sudo apt update && sudo apt upgrade
 
 7. Starting with the Intel Realsense D435i
     - At this moment, there is no complete support for the D435i with the JEtpack 6 installation
