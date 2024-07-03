@@ -111,6 +111,16 @@ Some misc. notes for starting Orin development:
 [FATAL] [1720027747.651327861]: Failed to load nodelet '/ImageConverterNode` of type `isaac_ros_nitros_bridge_ros1/ImageConverterNode` to manager `standalone_nodelet'
 ++--++
 
+     - Took some time to understand a couple of files in the Issac ROS bridge, now will try running the entrypoint.sh with correct parameters and the FLIR Ir running manually
+            - Navigate to: /workspaces/isaac_ros_1-dev/src/isaac_ros_nitros_bridge/scripts
+            - sudo chmod +x nitros-bridge-entrypoint.sh isaac_ros_nitros_bridge_ros1.py 
+
+
+
+
+/workspaces/isaac_ros_1-dev/src/isaac_ros_nitros_bridge/scripts$ ./nitros-bridge-entrypoint.sh nitros_bridge_image_converter.yaml nitros_bridge_image_converter.launch "/flir_boson/image_raw" "/ros1_output_image"
+
+
 
 
 7. Starting with the Intel Realsense D435i
