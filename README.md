@@ -40,12 +40,14 @@ To get started with porting the IR image to ROS2, guide: https://nvidia-isaac-ro
 ---
 Some misc. notes for starting Orin development:
 1. Installed a new NVMe drive
-2. Used Nvidia's sdkmanager on another Ubuntu amd64 computer to flash and install runtime/sdk components to the Orin.
+2. Used Nvidia's sdkmanager on another Ubuntu amd64 computer to flash and install runtime/sdk components to the Orin. (Jetpack 6.0 w/ all runtime and sdk components installed)
 - This video basically walks through it: https://www.youtube.com/watch?v=Ucg5Zqm9ZMk&t=90s
 - Sdkmanager download: https://developer.nvidia.com/sdk-manager
 3. Back on the Orin, sudo apt update && sudo apt upgrade
+4. sudo apt install python3-pip
 4. sudo pip3 install -U jetson-stats
 5. restart and run jtop
+  (Some erros may show up from Jetpack isntallation, install missing Jetpack components with these commands: https://developer.nvidia.com/embedded/learn/get-started-jetson-agx-orin-devkit)
     - Just housekeeping libraries and other stats
     -   CUDA: 12.2.140
     -   cuDNN: 8.9.4.25
@@ -61,8 +63,9 @@ Some misc. notes for starting Orin development:
 6. Downloading ROS2 Humble: https://nvidia-isaac-ros.github.io/getting_started/isaac_apt_repository.html
     - Difference from standard installation: https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
         - Is that it also installs gnupg and wget, but these are already included.
-        - And that is registers the GPG ket with isaa ros keys
-    - Installed ros-humble-desktop (may not be needed, but also installed ros-dev-tools)
+        - And that is registers the GPG ket with isaac ros keys
+    - Installed development tools and ROS tools (common packages) and python3 flake/pytest packages according to the official ros humble docs
+    - Installed ros-humble-desktop-full (may not be needed, but also installed ros-dev-tools)
 7. Starting with the Intel Realsense D435i
     - At this moment, there is no complete support for the D435i with the JEtpack 6 installation
     -   However, they have added support for JP6.0 with the D457 MIPI
