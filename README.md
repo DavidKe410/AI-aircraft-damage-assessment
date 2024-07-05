@@ -116,9 +116,11 @@ Some misc. notes for starting Orin development:
             - sudo chmod +x nitros-bridge-entrypoint.sh isaac_ros_nitros_bridge_ros1.py 
             - then ran ./nitros-bridge-entrypoint.sh nitros_bridge_image_converter.yaml nitros_bridge_image_converter.launch "/flir_boson/image_raw" "/ros1_output_image"
                   - within the same directory: /workspaces/isaac_ros_1-dev/src/isaac_ros_nitros_bridge/scripts
-            - same error though
+            - **SAME ERROR THOUGH**
 
-     - Think its a problem with GLIBC_2.34 primarily. Asked Chat GPT and this is the fix it gave but also said its super risky
+     - Think its a problem with GLIBC_2.34 primarily. Asked Chat GPT and looked at multiple stack exchange posts and this is the fix it gave but also said its super risky
+
+++--++
 sudo apt update && sudo apt upgrade && sudo apt install gawk bison
 wget http://ftp.gnu.org/gnu/libc/glibc-2.34.tar.gz
 tar -xzf glibc-2.34.tar.gz
@@ -129,7 +131,16 @@ cd build
 make -j4
 sudo make install
 export LD_LIBRARY_PATH=/opt/glibc-2.34/lib:$LD_LIBRARY_PATH
+++--++
 
+     - I don't think this is easily fixable since the inherent kernal within the image is non updatable unless we upgrade to 22.04 which noetic can't run on...
+     - So the regular bridge works, just make sure the master uri are good. We are getting 60 fps with the regular bridge and there actually isn't a huge CPU load, so this was totally fine from the beginning damn it.
+9. Getting started with the ISAAC ros dev environment docker setup for the depth image pipeline and the realsense
+       - https://nvidia-isaac-ros.github.io/getting_started/hardware_setup/compute/index.html; already had the plugin though
+       - Then: https://nvidia-isaac-ros.github.io/getting_started/dev_env_setup.html, skip the ssd instructions 
+             - Step 4, do Jetson with SSD
+10. Looks like that didn't work out too well, just pulling a premade realsense/ros docker at this point
+    - https://github.com/2b-t/realsense-ros2-docker/tree/main; just followed this
 
 7. Starting with the Intel Realsense D435i
     - At this moment, there is no complete support for the D435i with the JEtpack 6 installation
@@ -145,6 +156,23 @@ figuring out things
 
 workspaces/isaac_ros_1-dev/src/isaac_ros_nitros_bridge/ros1/isaac_ros_nitros_bridge_ros1/launch
 
+
+
+
+
+
+
+---
+When trying to patch the Jetpack 6 HID kernal issue for the realsense, we get this error:
+"
+/home/orin/realsense_mipi_platform_driver/l4t-gcc/6.0/bin/aarch64-buildroot-linux-gnu-gcc: unknown compiler
+scripts/Kconfig.include:44: Sorry, this compiler is not supported.
+make[2]: *** [scripts/kconfig/Makefile:87: defconfig] Error 1
+make[1]: *** [Makefile:630: defconfig] Error 2
+make[1]: Leaving directory '/home/orin/realsense_mipi_platform_driver/sources_6.0/kernel/kernel-jammy-src'
+make: *** [Makefile:24: kernel] Error 2
+make: Leaving directory '/home/orin/realsense_mipi_platform_driver/sources_6.0/kernel'
+"
 ---
 Arducam ToF seems to take video0, FLIR IR seems to take video1 and video2
 Realsense seems to take video3 to video8
