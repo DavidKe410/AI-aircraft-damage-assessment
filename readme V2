@@ -55,14 +55,16 @@ Starting the Orin development with Jetpack 5.1.3:
       - git checkout `git tag | sort -V | grep -P "^2.\d+\.\d+" | tail -1`
       - cd ~/air_dmg_assesment_ws/src/realsense-ros/realsense2_camera && nano CMakeLists.txt
       - cd ~/air_dmg_assesment_ws && catkin_make
-      - source devel/setup.bash && catkin_make
-      - source again for good measure
-
-              
-                
-                
-
-roslaunch realsense2_camera rs_camera.launch enable_gyro:=true enable_accel:=true unite_imu_method:=linear_interpolation align_depth:=true enable_pointcloud:=true^C
+      - source devel/setup.bash
+    - Check functionality with cmd: roslaunch realsense2_camera rs_camera.launch enable_gyro:=true enable_accel:=true unite_imu_method:=linear_interpolation align_depth:=true enable_pointcloud:=true
+      - For the point cloud, make sure the fixed frame is set to smth like camera_link
+      - Things that may be concerning but are not :/
+        1. "No stream match for pointcloud chosen texture Process - Color"
+          - This is whenever there is a frame drop of the pointcloud texture: https://github.com/IntelRealSense/realsense-ros/issues/588#issuecomment-457890773
+        2. "(ds-options.cpp:93) Asic Temperature value is not valid!"
+          - Just the insignificant moments when the timing is slightly off when trying to read from sensor: https://github.com/IntelRealSense/librealsense/issues/10378
+        3. "Param '/camera/rgb_camera/power_line_frequency' has value 3 that is not in the enum { {50Hz: 1} {60Hz: 2} {Disabled: 0} }. Removing this parameter from dynamic reconfigure options."
+          - No consequences in performance, just to mititage noise that can come from certain lights that are at those different frequencies: https://github.com/IntelRealSense/realsense-ros/issues/2359
 
 
 7. Starting with the Arducam ToF
