@@ -14,7 +14,7 @@ Starting the Orin development with Jetpack 5.1.3:
     -   TensorRT: 8.5.2.2
     -   VPI: 2.4.8
     -   Vulkan: 1.3.204
-    -   OpenCV: 4.5.4 with CUDA: NO
+    -   OpenCV: 4.5.4 with CUDA: NO --> Later do change it to yes w/ 4.6.0
     -   Jetpack: 5.1.3
     -   Distr: Ubuntu 20.04 Focal
     -   Python: 3.8.10
@@ -34,9 +34,9 @@ Starting the Orin development with Jetpack 5.1.3:
       - check usb video with ls /dev/video*
       - cd && roslaunch flir_boson_usb flir_boson.launch dev:=/dev/video0
         - switch video0 with your configuration
-8. Starting the legacy Realsense SDK and ros wrapper (dpkg -l | grep "realsense" | cut -d " " -f 3 | xargs sudo dpkg --purge)
+8. Starting the legacy Realsense SDK and ros wrapper (To restart and remove all realsense: dpkg -l | grep "realsense" | cut -d " " -f 3 | xargs sudo dpkg --purge)
     - Started by looking at what other people did to resolve some of the issues, here is what i did just in case to mititage future potential problems (SEEMS LIKE IN GENERAL THERE ARE A LOT OF PORBLEMS WITH REALSENSE AND JETSONS :()
-      - I installed OpenCV with Cuda (4.6.0): https://github.com/AastaNV/JEP/blob/master/script/install_opencv4.6.0_Jetson.sh
+      - I installed OpenCV with Cuda (4.6.0): https://github.com/AastaNV/JEP/blob/master/script/install_opencv4.6.0_Jetson.sh within a folder called openCVwithCuda :/
         - For this script, remove the installation of v4l2ucp and it hsould be good, though it will take some time
       - Then did this to make sure everything was still intact: sudo apt install ros-noetic-desktop-full
       - sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade
@@ -65,9 +65,7 @@ Starting the Orin development with Jetpack 5.1.3:
           - Just the insignificant moments when the timing is slightly off when trying to read from sensor: https://github.com/IntelRealSense/librealsense/issues/10378
         3. "Param '/camera/rgb_camera/power_line_frequency' has value 3 that is not in the enum { {50Hz: 1} {60Hz: 2} {Disabled: 0} }. Removing this parameter from dynamic reconfigure options."
           - No consequences in performance, just to mititage noise that can come from certain lights that are at those different frequencies: https://github.com/IntelRealSense/realsense-ros/issues/2359
-
-
-7. Starting with the Arducam ToF
+9. Starting with the Arducam ToF
     - Simply followed the online Arducam ToF guide:
     - Make sure to source humble before colcon building
     - source Arducam_tof_camera/ros2_publisher/install/setup.bash
