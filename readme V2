@@ -1,0 +1,47 @@
+Starting the Orin development with Jetpack 5.1.3:
+1. Installed a new NVMe drive
+2. Used Nvidia's sdkmanager on another Ubuntu amd64 computer to flash and install runtime/sdk components to the Orin. (Jetpack 5.1.3 w/ all runtime and sdk components installed)
+- This video basically walks through it: https://www.youtube.com/watch?v=Ucg5Zqm9ZMk&t=90s
+- Sdkmanager download: https://developer.nvidia.com/sdk-manager
+3. Back on the Orin, sudo apt update && sudo apt upgrade
+4. sudo apt install python3-pip
+4. sudo pip3 install -U jetson-stats
+5. restart and run jtop
+  (Some erros may show up from Jetpack isntallation, install missing Jetpack components with these commands: https://developer.nvidia.com/embedded/learn/get-started-jetson-agx-orin-devkit)
+    - Just housekeeping libraries and other stats
+    -   CUDA: 11.4.315
+    -   cuDNN: 8.6.0.166
+    -   TensorRT: 8.5.2.2
+    -   VPI: 2.4.8
+    -   Vulkan: 1.3.204
+    -   OpenCV: 4.5.4 with CUDA: NO
+    -   Jetpack: 5.1.3
+    -   Distr: Ubuntu 20.04 Focal
+    -   Python: 3.8.10
+    -   L4t: 35.5.0  
+    -   Interfaces: 192.168.1.135, docker0: 172.17.0.1
+6. Downloading ROS1 Noetic: https://wiki.ros.org/noetic/Installation/Ubuntu
+    - Installed the desktop full
+7. Starting with the Arducam ToF
+    - Simply followed the online Arducam ToF guide:
+    - Make sure to source humble before colcon building
+    - source Arducam_tof_camera/ros2_publisher/install/setup.bash
+          - when running: ros2 run arducam tof_pointcloud
+8. Moving onto getting the FLIR IR camera working within a Noetic docker and getting the ISAAC ROS bridge to work
+    - Followed this guide to first create the container:https://nvidia-isaac-ros.github.io/concepts/nitros_bridge/setup_ros1_docker.html
+        - Then followed the build command included
+    - Before continuining with the guide here and running its built in entrypoint: https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_nitros_bridge/index.html
+        - make sure the flir camera is plugged in so that there is a video1
+        - Run the container with /bin/bash as the entrypoint: "sudo docker run -it --cap-add=SYS_PTRACE --privileged --network host --pid host --runtime nvidia -v /dev:/dev --entrypoint=/bin/bash --rm --name nitros_bridge nitros_bridge:latest"
+             - Can switch out the -v /dev:/dev with "--device /dev/video1" if you want to be mroe secure, but does not allow dynamic plug/unplug, so just make sure everything is plugged in and stays in.
+        - Treat it like any other system: start with cd && sudo apt update && sudo apt upgrade
+        - Then "sudo rosdep init" and "rosdep update"
+        - Then moving onto the flir ir wrapper
+             - mkdir -p flir_ir/src && cd flir_ir/src
+             - git clone https://github.com/astuff/flir_boson_usb
+             - cd .. && rosdep install --from-paths src -y --ignore-src
+                    - should download opencv and etc
+             - source /opt/ros/noetic/setup.bash
+             - catkin_make
+             - cd .. && source flir_ir/devel/setup.bash
+             - check usb video with ls /dev/video*
