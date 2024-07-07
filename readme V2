@@ -34,6 +34,17 @@ Starting the Orin development with Jetpack 5.1.3:
       - check usb video with ls /dev/video*
       - cd && roslaunch flir_boson_usb flir_boson.launch dev:=/dev/video0
         - switch video0 with your configuration
+8. Starting the legacy Realsense ros wrapper (dpkg -l | grep "realsense" | cut -d " " -f 3 | xargs sudo dpkg --purge)
+    - Started by following: https://github.com/IntelRealSense/librealsense/blob/master/doc/installation_jetson.md
+      - For the 2nd step, I ran step 2 of this: https://developer.nvidia.com/embedded/learn/get-started-jetson-agx-orin-devkit
+      - I chose step 4, installing with debian packages
+    - Next, building the ros wrapper: https://github.com/IntelRealSense/realsense-ros/tree/ros1-legacy
+      - cd ~/air_dmg_assesment_ws/src && git clone https://github.com/IntelRealSense/realsense-ros.git -b ros1-legacy
+      - cd realsense-ros/
+      - git checkout `git tag | sort -V | grep -P "^2.\d+\.\d+" | tail -1`
+      - cd ../..
+      - source devel/setup.bash && catkin_make
+      - source again for good measure
 7. Starting with the Arducam ToF
     - Simply followed the online Arducam ToF guide:
     - Make sure to source humble before colcon building
