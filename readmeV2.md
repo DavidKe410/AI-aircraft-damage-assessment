@@ -27,7 +27,7 @@ Starting the Orin development with Jetpack 5.1.3:
     - git clone https://github.com/astuff/flir_boson_usb
     - Exit from src to run rosdep: cd .. && rosdep install --from-paths src -y --ignore-src
       - Should download other resources like opencv if you didn't have them already
-    - source /opt/ros/noetic/setup.bash
+      - source /opt/ros/noetic/setup.bash before hand too
     - catkin_make
     - Checking funtionality
       - source devel/setup.bash
