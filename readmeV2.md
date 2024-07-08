@@ -80,6 +80,7 @@ Starting the Orin development with Jetpack 5.1.3:
     - This takes A LOT of time, would recommend slimming this https://raw.githubusercontent.com/ros2/ros2/humble/ros2.repos down by removing rviz and other unneccesary packages
       - AND I DID! Second time around, just download my ros2.repos into the ros2_humble folder (I just removed the visualizations and rviz)
       - Then run this: "vcs import --input ros2.repos src" instead of the link to their page
+      - Had to: cd ~/ros2_humble/src/ros2/rclpy && touch COLCON_IGNORE
   - For the Arducam: https://docs.arducam.com/Nvidia-Jetson-Camera/Time-of-Flight-Camera/ROS-With-Arducam-ToF-Camera/
     - I had to sudo apt update && sudo apt apgrade and then sudo apt --fix-broken install the nvidia container [may not need to do this]
     - Simply followed the online Arducam ToF guide:
