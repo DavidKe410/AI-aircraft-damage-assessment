@@ -52,7 +52,7 @@ Starting the Orin development with Jetpack 5.1.3:
     - Next, building the ros wrapper: https://github.com/IntelRealSense/realsense-ros/tree/ros1-legacy
       - cd ~/air_dmg_assesment_ws/src && git clone https://github.com/IntelRealSense/realsense-ros.git -b ros1-legacy
       - cd realsense-ros/
-      - git checkout `git tag | sort -V | grep -P "^2.\d+\.\d+" | tail -1`
+      - git checkout \`git tag | sort -V | grep -P "^2.\d+\.\d+" | tail -1\`
           - Make sure the single back quote is there
           - May not work, try this, using a variable:
               - latest_tag=$(git tag | sort -V | grep -P "^2.\d+\.\d+" | tail -1)
