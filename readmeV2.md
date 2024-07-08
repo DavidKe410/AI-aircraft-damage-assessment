@@ -78,7 +78,14 @@ Starting the Orin development with Jetpack 5.1.3:
     - MAKE SURE NOT TO SOUR NOETIC BEFORE BUILDING; To check: printenv | grep -i ROS
       - To unset env variable: unset variable_name
     - This takes A LOT of time, would recommend slimming this https://raw.githubusercontent.com/ros2/ros2/humble/ros2.repos down by removing rviz and other unneccesary packages
-
+      - AND I DID! Second time around, just download my ros2.repos into the ros2_humble folder (I just removed the visualizations and rviz)
+      - Then run this: "vcs import --input ros2.repos src" instead of the link to their page
+  - For the Arducam: https://docs.arducam.com/Nvidia-Jetson-Camera/Time-of-Flight-Camera/ROS-With-Arducam-ToF-Camera/
+    - I had to sudo apt update && sudo apt apgrade and then sudo apt --fix-broken install the nvidia container [may not need to do this]
+    - Simply followed the online Arducam ToF guide:
+    - Make sure to source humble before colcon building
+    - source Arducam_tof_camera/ros2_publisher/install/setup.bash
+          - when running: ros2 run arducam tof_pointcloud
 
 
   - sudo docker build -t ardu_bridge . (Dockerfile basically unmodified from official besides deleting the entrypoint that soruces the terminal)
