@@ -59,7 +59,8 @@ Starting the Orin development with Jetpack 5.1.3:
               - git checkout $latest_tag
       - cd ~/air_dmg_assesment_ws/src/realsense-ros/realsense2_camera && nano CMakeLists.txt
         - Changes: https://github.com/IntelRealSense/realsense-ros/issues/2326#issuecomment-1107658481
-        - And for reference: https://github.com/IntelRealSense/realsense-ros/issues/2467#issuecomment-1268417031, [Did not use that much but another comment] https://github.com/IntelRealSense/librealsense/issues/10722#issuecomment-1230250762
+        - And for reference: https://github.com/IntelRealSense/realsense-ros/issues/2467#issuecomment-1268417031, [Did not use that much but another comment: https://github.com/IntelRealSense/librealsense/issues/10722#issuecomment-1230250762]
+      - sudo apt-get install ros-noetic-ddynamic-reconfigure
       - cd ~/air_dmg_assesment_ws && catkin_make
       - source devel/setup.bash
     - Check functionality with cmd: roslaunch realsense2_camera rs_camera.launch enable_gyro:=true enable_accel:=true unite_imu_method:=linear_interpolation align_depth:=true enable_pointcloud:=true
@@ -71,12 +72,20 @@ Starting the Orin development with Jetpack 5.1.3:
           - Just the insignificant moments when the timing is slightly off when trying to read from sensor: https://github.com/IntelRealSense/librealsense/issues/10378
         3. "Param '/camera/rgb_camera/power_line_frequency' has value 3 that is not in the enum { {50Hz: 1} {60Hz: 2} {Disabled: 0} }. Removing this parameter from dynamic reconfigure options."
           - No consequences in performance, just to mititage noise that can come from certain lights that are at those different frequencies: https://github.com/IntelRealSense/realsense-ros/issues/2359
-9. Starting with the Arducam ToF, Humble/Noetic Docker and bridge
+9. Starting with the Arducam ToF, Humble/Noetic bridge
+  - Start following this guide to install ROS2 Humble from source: https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html#id4
+    - Choose the Ubuntu 20.04 LTS option
+    - MAKE SURE NOT TO SOUR NOETIC BEFORE BUILDING; To check: printenv | grep -i ROS
+      - To unset env variable: unset variable_name
+    - This takes A LOT of time, would recommend slimming this https://raw.githubusercontent.com/ros2/ros2/humble/ros2.repos down by removing rviz and other unneccesary packages
+
+
+
   - sudo docker build -t ardu_bridge . (Dockerfile basically unmodified from official besides deleting the entrypoint that soruces the terminal)
   - sudo docker run -it --cap-add=SYS_PTRACE --privileged --network=host --pid=host --runtime=nvidia -v=/dev:/dev -v /usr/lib/aarch64-linux-gnu:/usr/lib/aarch64-linux-gnu -v /usr/lib/tegra:/usr/lib/tegra -v /usr/src:/usr/src --entrypoint=/bin/bash --rm --name=ardu_tof_bridge ardu_bridge:latest
   - sudo docker run -it --cap-add=SYS_PTRACE --privileged --network=host --pid=host --runtime=nvidia -v=/dev:/dev -v=/var/lib/dpkg:/var/lib/dpkg:ro --entrypoint=/bin/bash --rm --name=ardu_tof_bridge ardu_tof_bridgev2:latest
 
-  - Start following this guide to install ROS2 Humble frmo source: https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html#id4
+  - Start following this guide to install ROS2 Humble from source: https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html#id4
     - Choose the Ubuntu 20.04 LTS option
     - MAKE SURE NOT TO SOUR NOETIC BEFORE BUILDING; To check: printenv | grep -i ROS
       - To unset env variable: unset variable_name
