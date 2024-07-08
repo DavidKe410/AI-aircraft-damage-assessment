@@ -53,6 +53,10 @@ Starting the Orin development with Jetpack 5.1.3:
       - cd ~/air_dmg_assesment_ws/src && git clone https://github.com/IntelRealSense/realsense-ros.git -b ros1-legacy
       - cd realsense-ros/
       - git checkout `git tag | sort -V | grep -P "^2.\d+\.\d+" | tail -1`
+          - Make sure the single back quote is there
+          - May not work, try this, using a variable:
+              - latest_tag=$(git tag | sort -V | grep -P "^2.\d+\.\d+" | tail -1)
+              - git checkout $latest_tag
       - cd ~/air_dmg_assesment_ws/src/realsense-ros/realsense2_camera && nano CMakeLists.txt
         - Changes: https://github.com/IntelRealSense/realsense-ros/issues/2326#issuecomment-1107658481
         - And for reference: https://github.com/IntelRealSense/realsense-ros/issues/2467#issuecomment-1268417031, [Did not use that much but another comment] https://github.com/IntelRealSense/librealsense/issues/10722#issuecomment-1230250762
