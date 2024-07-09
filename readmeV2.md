@@ -75,7 +75,7 @@ Starting the Orin development with Jetpack 5.1.2:
 9. Starting with the Arducam ToF, Humble/Noetic bridge
   - Start following this guide to install ROS2 Humble from source: https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html#id4
     - Choose the Ubuntu 20.04 LTS option
-    - MAKE SURE NOT TO SOURCE NOETIC BEFORE BUILDING; To check: printenv | grep -i ROS
+    - MAKE SURE NOT TO SOURCE NOETIC/Humble BEFORE BUILDING; To check: printenv | grep -i ROS
       - To unset env variable: unset variable_name
     - This takes A LOT of time when we colcon build, would recommend slimming this https://raw.githubusercontent.com/ros2/ros2/humble/ros2.repos down by removing rviz and other unneccesary packages
       - AND I DID! Second time around, just download my ros2.repos into the ros2_humble folder (I just removed the visualizations and rviz)
