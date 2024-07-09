@@ -1,4 +1,4 @@
-Starting the Orin development with Jetpack 5.1.2:
+Starting the Orin development with Jetpack 5.1.2. Arducam doesn't with JP 5.1.3 and Realsense is very annoying with JP6 due to kernal + HID issues:
 1. Installed a new NVMe drive
 2. Used Nvidia's sdkmanager on another Ubuntu amd64 computer to flash and install runtime/sdk components to the Orin. (Jetpack 5.1.2 w/ all runtime and sdk components installed)
 - This video basically walks through it: https://www.youtube.com/watch?v=Ucg5Zqm9ZMk&t=90s
@@ -72,8 +72,51 @@ Starting the Orin development with Jetpack 5.1.2:
           - Just the insignificant moments when the timing is slightly off when trying to read from sensor: https://github.com/IntelRealSense/librealsense/issues/10378
         3. "Param '/camera/rgb_camera/power_line_frequency' has value 3 that is not in the enum { {50Hz: 1} {60Hz: 2} {Disabled: 0} }. Removing this parameter from dynamic reconfigure options."
           - No consequences in performance, just to mititage noise that can come from certain lights that are at those different frequencies: https://github.com/IntelRealSense/realsense-ros/issues/2359
-9. Starting with the Arducam ToF, Humble/Noetic bridge
-  - Start following this guide to install ROS2 Humble from source: https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html#id4
+9. Starting with the Arducam ToF, Galactic/Noetic bridge
+  - Start following this to install ROS2 Galactic: https://docs.ros.org/en/galactic/Installation/Ubuntu-Install-Debians.html
+    - Downloaded the base
+  - For the Arducam: https://docs.arducam.com/Nvidia-Jetson-Camera/Time-of-Flight-Camera/ROS-With-Arducam-ToF-Camera/
+    - cd && git clone https://github.com/ArduCAM/Arducam_tof_camera.git
+    - cd ~/Arducam_tof_camera/jetson && ./Install_dependecies_jetson.sh 
+    - yes to reboot
+    - To test functionality: cd ~/Arducam_tof_camera && ./compile.sh
+    - mkdir -p ~/ardu_tof_bridge_ws/src
+    - cd Arducam_tof_camera/ros2_publisher/src
+    - mv arducam ~/ardu_tof_bridge_ws/src
+    - source /opt/ros/galactic/setup.bash
+    - cd ~/ardu_tof_bridge_ws && colcon build --merge-install
+    - source install/setup.bash
+      - when running: ros2 run arducam tof_pointcloud
+    - I moved the orginal Arducam_tof_camera folder into the arducam package as well for housekeeping
+  - Now for bridging ROS1 and ROS2: https://github.com/ros2/ros1_bridge
+    - cd ~/ardu_tof_bridge_ws/src && git clone sudo apt https://github.com/ros2/ros1_bridge.git
+    - export ROS1_INSTALL_PATH=/opt/ros/noetic
+    - export ROS2_INSTALL_PATH=/opt/ros/galactic
+    - source ${ROS1_INSTALL_PATH}/setup.bash
+    - source ${ROS2_INSTALL_PATH}/setup.bash
+    - cd .. && colcon build --symlink-install --packages-select ros1_bridge --cmake-force-configure --merge-install
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  - sudo docker build -t ardu_bridge . (Dockerfile basically unmodified from official besides deleting the entrypoint that soruces the terminal)
+  - sudo docker run -it --cap-add=SYS_PTRACE --privileged --network=host --pid=host --runtime=nvidia -v=/dev:/dev -v /usr/lib/aarch64-linux-gnu:/usr/lib/aarch64-linux-gnu -v /usr/lib/tegra:/usr/lib/tegra -v /usr/src:/usr/src --entrypoint=/bin/bash --rm --name=ardu_tof_bridge ardu_bridge:latest
+  - sudo docker run -it --cap-add=SYS_PTRACE --privileged --network=host --pid=host --runtime=nvidia -v=/dev:/dev -v=/var/lib/dpkg:/var/lib/dpkg:ro --entrypoint=/bin/bash --rm --name=ardu_tof_bridge ardu_tof_bridgev2:latest
+
+    - Start following this guide to install ROS2 Humble from source: https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html#id4
     - Choose the Ubuntu 20.04 LTS option
     - MAKE SURE NOT TO SOURCE NOETIC/Humble BEFORE BUILDING; To check: printenv | grep -i ROS
       - To unset env variable: unset variable_name
@@ -81,25 +124,6 @@ Starting the Orin development with Jetpack 5.1.2:
       - AND I DID! Second time around, just download my ros2.repos into the ros2_humble folder (I just removed the visualizations, rviz, tutorials/examples, and rclpy (which I mention below))
       - Then run this: "vcs import --input ros2.repos src" instead of the link to their page
       - THERE IS A PROBLEM building rclpy. Simply colcon ignore it or use my .repos that already removed it: cd ~/ros2_humble/src/ros2/rclpy && touch COLCON_IGNORE
-  - For the Arducam: https://docs.arducam.com/Nvidia-Jetson-Camera/Time-of-Flight-Camera/ROS-With-Arducam-ToF-Camera/
-    - cd && git clone https://github.com/ArduCAM/Arducam_tof_camera.git
-    - cd ~/Arducam_tof_camera/jetson && ./Install_dependecies_jetson.sh 
-
-    - Make sure to source humble before colcon building
-    - source Arducam_tof_camera/ros2_publisher/install/setup.bash
-          - when running: ros2 run arducam tof_pointcloud
-
-
-  - sudo docker build -t ardu_bridge . (Dockerfile basically unmodified from official besides deleting the entrypoint that soruces the terminal)
-  - sudo docker run -it --cap-add=SYS_PTRACE --privileged --network=host --pid=host --runtime=nvidia -v=/dev:/dev -v /usr/lib/aarch64-linux-gnu:/usr/lib/aarch64-linux-gnu -v /usr/lib/tegra:/usr/lib/tegra -v /usr/src:/usr/src --entrypoint=/bin/bash --rm --name=ardu_tof_bridge ardu_bridge:latest
-  - sudo docker run -it --cap-add=SYS_PTRACE --privileged --network=host --pid=host --runtime=nvidia -v=/dev:/dev -v=/var/lib/dpkg:/var/lib/dpkg:ro --entrypoint=/bin/bash --rm --name=ardu_tof_bridge ardu_tof_bridgev2:latest
-
-  - Start following this guide to install ROS2 Humble from source: https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html#id4
-    - Choose the Ubuntu 20.04 LTS option
-    - MAKE SURE NOT TO SOUR NOETIC BEFORE BUILDING; To check: printenv | grep -i ROS
-      - To unset env variable: unset variable_name
-    - This takes A LOT of time, would recommend slimming this https://raw.githubusercontent.com/ros2/ros2/humble/ros2.repos down by removing rviz and other unneccesary packages
-      - If you do build entire, then recommend pushing to another image right after so you don't have to redo this. (docker commit container_id imagename)
   - For the Arducam: https://docs.arducam.com/Nvidia-Jetson-Camera/Time-of-Flight-Camera/ROS-With-Arducam-ToF-Camera/
     - I had to sudo apt update && sudo apt apgrade and then sudo apt --fix-broken install the nvidia container [may not need to do this]
     - Simply followed the online Arducam ToF guide:
