@@ -1,6 +1,6 @@
-Starting the Orin development with Jetpack 5.1.3:
+Starting the Orin development with Jetpack 5.1.2:
 1. Installed a new NVMe drive
-2. Used Nvidia's sdkmanager on another Ubuntu amd64 computer to flash and install runtime/sdk components to the Orin. (Jetpack 5.1.3 w/ all runtime and sdk components installed)
+2. Used Nvidia's sdkmanager on another Ubuntu amd64 computer to flash and install runtime/sdk components to the Orin. (Jetpack 5.1.2 w/ all runtime and sdk components installed)
 - This video basically walks through it: https://www.youtube.com/watch?v=Ucg5Zqm9ZMk&t=90s
 - Sdkmanager download: https://developer.nvidia.com/sdk-manager
 3. Back on the Orin, sudo apt update && sudo apt upgrade
@@ -12,13 +12,13 @@ Starting the Orin development with Jetpack 5.1.3:
     -   CUDA: 11.4.315
     -   cuDNN: 8.6.0.166
     -   TensorRT: 8.5.2.2
-    -   VPI: 2.4.8
+    -   VPI: 2.3.9
     -   Vulkan: 1.3.204
     -   OpenCV: 4.5.4 with CUDA: NO --> Later do change it to yes w/ 4.6.0
-    -   Jetpack: 5.1.3
+    -   Jetpack: 5.1.2
     -   Distr: Ubuntu 20.04 Focal
     -   Python: 3.8.10
-    -   L4t: 35.5.0  
+    -   L4t: 35.4.1  
     -   Interfaces: 192.168.1.135, docker0: 172.17.0.1
 6. Downloading ROS1 Noetic: https://wiki.ros.org/noetic/Installation/Ubuntu
     - Installed the desktop full, the dependencies that they mention, rosdep
