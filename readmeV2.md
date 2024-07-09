@@ -82,8 +82,8 @@ Starting the Orin development with Jetpack 5.1.2:
       - Then run this: "vcs import --input ros2.repos src" instead of the link to their page
       - THERE IS A PROBLEM building rclpy. Simply colcon ignore it or use my .repos that already removed it: cd ~/ros2_humble/src/ros2/rclpy && touch COLCON_IGNORE
   - For the Arducam: https://docs.arducam.com/Nvidia-Jetson-Camera/Time-of-Flight-Camera/ROS-With-Arducam-ToF-Camera/
-    - I had to sudo apt update && sudo apt apgrade and then sudo apt --fix-broken install the nvidia container [may not need to do this]
-    - Simply followed the online Arducam ToF guide:
+    - cd && git clone https://github.com/ArduCAM/Arducam_tof_camera.git
+    - cd ~/Arducam_tof_camera/jetson/ && ./Install_dependencies_jetson.sh
     - Make sure to source humble before colcon building
     - source Arducam_tof_camera/ros2_publisher/install/setup.bash
           - when running: ros2 run arducam tof_pointcloud
