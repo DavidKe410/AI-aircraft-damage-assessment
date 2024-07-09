@@ -106,9 +106,9 @@ Starting the Orin development with Jetpack 5.1.2. Arducam doesn't with JP 5.1.3 
 
 
 
+roslaunch flir_boson_usb flir_boson.launch dev:=/dev/video0
 
-
-
+roslaunch realsense2_camera rs_camera.launch enable_gyro:=true enable_accel:=true unite_imu_method:=linear_interpolation align_depth:=true 
 
 
 
