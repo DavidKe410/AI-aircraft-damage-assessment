@@ -95,12 +95,13 @@ Starting the Orin development with Jetpack 5.1.2. Arducam doesn't with JP 5.1.3 
     - source ${ROS1_INSTALL_PATH}/setup.bash
     - source ${ROS2_INSTALL_PATH}/setup.bash
     - cd .. && colcon build --symlink-install --packages-select ros1_bridge --cmake-force-configure --merge-install
-
-
-
-
-
-
+    - cd ~/ardu_tof_bridge_ws/src/ros1_bridge && touch bridge.yaml (Or just downlod the one I uploaded)
+  - To check functionality and how to run
+    - Terminal 1: source /opt/ros/noetic/setup.bash && roscore
+    - Terminal 2: source /opt/ros/noetic/setup.bash && rosparam load ~/ardu_tof_bridge_ws/src/ros1_bridge/bridge.yaml
+      - Can run a subscriber here, I did rviz
+    - Terminal 3: source ardu_tof_bridge_ws/install/setup.bash && ros2 run arducam tof_pointcloud
+    - Terminal 4: source ardu_tof_bridge_ws/install/setup.bash && ros2 run ros1_bridge parameter_bridge
 
 
 
