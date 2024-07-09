@@ -1,0 +1,33 @@
+topics:
+  -
+    topic: /depth_frame
+    type: std_msgs/msg/Float32MultiArray
+    queue_size: 3
+    qos:
+      history: keep_last  # OR keep_all, then you can omit `depth` parameter below
+      depth: 5  # Only required when history == keep_last
+      reliability: reliable  # OR best_effort
+      durability: volatile  # OR volatile
+      deadline:
+          secs: 2
+      lifespan:
+          secs: 2
+      liveliness: liveliness_system_default  # Values from https://design.ros2.org/articles/qos_deadline_liveliness_lifespan.html, eg. LIVELINESS_AUTOMATIC
+      liveliness_lease_duration:
+          secs: 40
+  -
+    topic: /point_cloud
+    type: sensor_msgs/msg/PointCloud
+    queue_size: 3
+    qos:
+      history: keep_last  # OR keep_all, then you can omit `depth` parameter be>
+      depth: 5  # Only required when history == keep_last
+      reliability: reliable  # OR best_effort
+      durability: volatile  # OR volatile
+      deadline:
+          secs: 2
+      lifespan:
+          secs: 2
+      liveliness: liveliness_system_default  # Values from https://design.ros2.>
+      liveliness_lease_duration:
+          secs: 40
