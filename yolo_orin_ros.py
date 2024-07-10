@@ -29,8 +29,6 @@ class frame_process():
     def frame_callback(self, frame):
         bridge = CvBridge()
         frame = bridge.imgmsg_to_cv2(frame, desired_encoding='rgb8')
-        # Create a dict that resets after each frame is received
-        track_entry = {}
 
         # Add 1 to the count to count frame number
         self.count = self.count + 1
@@ -58,15 +56,13 @@ class frame_process():
                     # Save the label for the box
                     label = results[0].names[int(c)]
 
-                    # Get box locations and save to a list (x y center point)
-                    x, y, w, h = box 
-                    track_entry[(track_id,label)] = ((float(x), float(y)))
+                    # Get box locations (x y center point)
+                    x, y, w, h = box
 
-                # Convert the dict to String using json
-                dict_string = json.dumps(track_entry)
-
-                # Publish the tracking dictionary only with detections
-                self.coord_pub.publish(dict_string)
+                    point_data = String(label, track_id, x, y)
+    
+                    # Publish the tracking dictionary only with detections
+                    self.coord_pub.publish(point_data)
             
 
 if __name__ == '__main__': 
