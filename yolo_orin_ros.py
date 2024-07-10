@@ -57,8 +57,11 @@ class frame_process():
 
                     # Get box locations (x y center point)
                     x, y, w, h = box
-
-                    point_data = String(label, track_id, x, y)
+                    label = String(label)
+                    id = String(track_id)
+                    x = String(x)
+                    y = String(y)
+                    point_data = concatenate(label, id, x, y)
     
                     # Publish the tracking dictionary only with detections
                     self.coord_pub.publish(point_data)
