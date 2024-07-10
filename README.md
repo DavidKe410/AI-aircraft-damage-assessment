@@ -106,7 +106,7 @@ Starting the Orin development with Jetpack 5.1.2. Arducam doesn't with JP 5.1.3 
       - Can run a subscriber here, I did rviz
     - Terminal 3: source ardu_tof_bridge_ws/install/setup.bash && ros2 run arducam tof_pointcloud
     - Terminal 4: source ardu_tof_bridge_ws/install/setup.bash && ros2 run ros1_bridge parameter_bridge
-10. Trying to get the model YoloV8 running on the Orin with a Docker
+10. Trying to get the model YoloV8 running on the Orin
   - Copied Joe's example YOLOv8 python file running with cuda and pytorch over
   - To gain compatibility with the Jetson Orin architecture and GPU: follow this guide https://docs.ultralytics.com/guides/nvidia-jetson/#run-on-jetpack-5x
     - Make sure to sudo apt update and upgrade as usual beforehand
@@ -133,7 +133,12 @@ Starting the Orin development with Jetpack 5.1.2. Arducam doesn't with JP 5.1.3 
     - sudo make install
     - cd ~/air_dmg_assesment_ws/ && git clone https://github.com/introlab/rtabmap_ros.git src/rtabmap_ros
     - catkin_make -j4 -DRTABMAP_SYNC_USER_DATA=ON
-13. Making the middleman between the pixel coordinates Joe is giving and the 3d points that Elliott needs
+13. Making the actual package to run the rosified YOLOv8 model that Joe has been working on: http://wiki.ros.org/ROS/Tutorials/CreatingPackage
+  - cd ~/air_dmg_assesment_ws/src/
+  - catkin_create_pkg yolo_ros sensor_msgs std_msgs rospy roscpp
+  - download the yolo_orin_ros.py code into yolo_ros/src
+  - For our example, we also moved the .pt model file into yolo_ros and redid the path within the code
+1x. Making the middleman between the pixel coordinates Joe is giving and the 3d points that Elliott needs
   - Publishing:
       - a string of one point "x,y,z,label"
   - Subscribing:
