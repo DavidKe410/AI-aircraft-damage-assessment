@@ -38,7 +38,7 @@ class frame_process():
 
         if self.count%3 == 0:
             # Run YOLOv8 tracking on the frame while persisting tracks between frames, adjust conf, iou, and other params
-            results = model.track(frame, conf = 0.3, iou = 0.1, device = self.device, retina_masks = False, persist = True, tracker = 'home/yolo_track_ros/src/yolo_orin/src/bytetrack.yaml') #, classes = [0]) # Can set the model to track certain classes
+            results = model.track(frame, conf = 0.3, iou = 0.1, device = self.device, retina_masks = False, persist = True, tracker = '/home/orin/air_dmg_assesment_ws/src/yolo_ros/orin_run/bytetrack.yaml') #, classes = [0]) # Can set the model to track certain classes
             
             # Create a frame with the segments and boxes, can adjust the bool params to hide boxes, conf, id, label
             annotated_frame = results[0].plot()
