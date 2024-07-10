@@ -1,3 +1,6 @@
+# ML-aircraft-damage-assesment
+Using machine learning to supplement aircraft damage assesments
+
 Starting the Orin development with Jetpack 5.1.2. Arducam doesn't with JP 5.1.3 and Realsense is very annoying with JP6 due to kernal + HID issues:
 1. Installed a new NVMe drive
 2. Used Nvidia's sdkmanager on another Ubuntu amd64 computer to flash and install runtime/sdk components to the Orin. (Jetpack 5.1.2 w/ all runtime and sdk components installed)
@@ -121,7 +124,7 @@ Starting the Orin development with Jetpack 5.1.2. Arducam doesn't with JP 5.1.3 
 
 
 
-For script
+For script:
 
 Terminal 1: source ~/air_dmg_assesment_ws/devel/setup.bash && roslaunch flir_boson_usb flir_boson.launch dev:=/dev/video1 && rosparam load ~/ardu_tof_bridge_ws/src/ros1_bridge/bridge.yaml
 
@@ -132,32 +135,3 @@ Terminal 3: source ardu_tof_bridge_ws/install/setup.bash && ros2 run arducam tof
 Terminal 4: source ardu_tof_bridge_ws/install/setup.bash && ros2 run ros1_bridge parameter_bridge
 
 Terminal 5 (if needed): source /opt/ros/noetic/setup.bash && rosrun tf static_transform_publisher 0 0 0.075 0.5 0.5 0.5 -0.5 sensor_frame camera_link 100
-
-
-
-
-------------------
-  - sudo docker build -t ardu_bridge . (Dockerfile basically unmodified from official besides deleting the entrypoint that soruces the terminal)
-  - sudo docker run -it --cap-add=SYS_PTRACE --privileged --network=host --pid=host --runtime=nvidia -v=/dev:/dev -v /usr/lib/aarch64-linux-gnu:/usr/lib/aarch64-linux-gnu -v /usr/lib/tegra:/usr/lib/tegra -v /usr/src:/usr/src --entrypoint=/bin/bash --rm --name=ardu_tof_bridge ardu_bridge:latest
-  - sudo docker run -it --cap-add=SYS_PTRACE --privileged --network=host --pid=host --runtime=nvidia -v=/dev:/dev -v=/var/lib/dpkg:/var/lib/dpkg:ro --entrypoint=/bin/bash --rm --name=ardu_tof_bridge ardu_tof_bridgev2:latest
-
-    - Start following this guide to install ROS2 Humble from source: https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html#id4
-    - Choose the Ubuntu 20.04 LTS option
-    - MAKE SURE NOT TO SOURCE NOETIC/Humble BEFORE BUILDING; To check: printenv | grep -i ROS
-      - To unset env variable: unset variable_name
-    - This takes A LOT of time when we colcon build, would recommend slimming this https://raw.githubusercontent.com/ros2/ros2/humble/ros2.repos down by removing rviz and other unneccesary packages
-      - AND I DID! Second time around, just download my ros2.repos into the ros2_humble folder (I just removed the visualizations, rviz, tutorials/examples, and rclpy (which I mention below))
-      - Then run this: "vcs import --input ros2.repos src" instead of the link to their page
-      - THERE IS A PROBLEM building rclpy. Simply colcon ignore it or use my .repos that already removed it: cd ~/ros2_humble/src/ros2/rclpy && touch COLCON_IGNORE
-  - For the Arducam: https://docs.arducam.com/Nvidia-Jetson-Camera/Time-of-Flight-Camera/ROS-With-Arducam-ToF-Camera/
-    - I had to sudo apt update && sudo apt apgrade and then sudo apt --fix-broken install the nvidia container [may not need to do this]
-    - Simply followed the online Arducam ToF guide:
-    - Make sure to source humble before colcon building
-    - source Arducam_tof_camera/ros2_publisher/install/setup.bash
-          - when running: ros2 run arducam tof_pointcloud
-
-
-geoclue geoclue 755 /var/lib/geoclue
-root crontab 2755 /usr/bin/crontab
-root ssl-cert 710 /etc/ssl/private
-root messagebus 4754 /usr/lib/dbus-1.0/dbus-daemon-launch-helper
