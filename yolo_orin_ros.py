@@ -29,7 +29,7 @@ class frame_process():
     # Loop through the video frames
     def frame_callback(self, frame):
         bridge = CvBridge()
-        frame = cv_image = bridge.imgmsg_to_cv2(frame, desired_encoding='passthrough')
+        frame = bridge.imgmsg_to_cv2(frame, desired_encoding='rgb8')
         # Create a dict that resets after each frame is received
         track_entry = {}
 
