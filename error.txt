@@ -1,65 +1,13 @@
-0: 512x640 (no detections), 16.9ms
-Speed: 2.9ms preprocess, 16.9ms inference, 0.9ms postprocess per image at shape (1, 3, 512, 640)
-[ERROR] [1720646568.503261]: bad callback: <bound method frame_process.frame_callback of <__main__.frame_process object at 0xfffef4a1c040>>
+[ERROR] [1720647170.789052]: bad callback: <bound method frame_process.frame_callback of <__main__.frame_process object at 0xfffef977e040>>
 Traceback (most recent call last):
   File "/opt/ros/noetic/lib/python3/dist-packages/rospy/topics.py", line 750, in _invoke_callback
     cb(msg)
-  File "/home/orin/air_dmg_assesment_ws/src/yolo_ros/src/yolo_orin_ros.py", line 73, in frame_callback
-    self.frame_pub.publish(annotated_frame)
-  File "/opt/ros/noetic/lib/python3/dist-packages/rospy/topics.py", line 879, in publish
-    data = args_kwds_to_message(self.data_class, args, kwds)
-  File "/opt/ros/noetic/lib/python3/dist-packages/rospy/msg.py", line 122, in args_kwds_to_message
-    return data_class(*args)
-  File "/opt/ros/noetic/lib/python3/dist-packages/sensor_msgs/msg/_Image.py", line 77, in __init__
-    super(Image, self).__init__(*args, **kwds)
-  File "/opt/ros/noetic/lib/python3/dist-packages/genpy/message.py", line 354, in __init__
-    raise TypeError('Invalid number of arguments, args should be %s' % str(self.__slots__) + ' args are' + str(args))
-TypeError: Invalid number of arguments, args should be ['header', 'height', 'width', 'encoding', 'is_bigendian', 'step', 'data'] args are(array([[[111, 111, 111],
-        [110, 110, 110],
-        [111, 111, 111],
-        ...,
-        [134, 134, 134],
-        [135, 135, 135],
-        [137, 137, 137]],
-
-       [[112, 112, 112],
-        [108, 108, 108],
-        [103, 103, 103],
-        ...,
-        [133, 133, 133],
-        [136, 136, 136],
-        [137, 137, 137]],
-
-       [[106, 106, 106],
-        [105, 105, 105],
-        [100, 100, 100],
-        ...,
-        [132, 132, 132],
-        [134, 134, 134],
-        [135, 135, 135]],
-
-       ...,
-
-       [[122, 122, 122],
-        [122, 122, 122],
-        [124, 124, 124],
-        ...,
-        [ 99,  99,  99],
-        [ 99,  99,  99],
-        [100, 100, 100]],
-
-       [[121, 121, 121],
-        [121, 121, 121],
-        [120, 120, 120],
-        ...,
-        [101, 101, 101],
-        [ 99,  99,  99],
-        [ 97,  97,  97]],
-
-       [[121, 121, 121],
-        [121, 121, 121],
-        [118, 118, 118],
-        ...,
-        [103, 103, 103],
-        [102, 102, 102],
-        [ 99,  99,  99]]], dtype=uint8),)
+  File "/home/orin/air_dmg_assesment_ws/src/yolo_ros/src/yolo_orin_ros.py", line 66, in frame_callback
+    dict_string = json.dumps(track_entry)
+  File "/usr/lib/python3.8/json/__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+  File "/usr/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+TypeError: keys must be str, int, float, bool or None, not tuple
