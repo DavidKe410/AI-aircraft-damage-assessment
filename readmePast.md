@@ -192,3 +192,32 @@ Removing librealsense2-utils:arm64 (2.55.1-0~realsense.3337) ...
 Removing librealsense2-gl:arm64 (2.55.1-0~realsense.3337) ...
 Removing librealsense2:arm64 (2.55.1-0~realsense.3337) ...
 Processing triggers for libc-bin (2.35-0ubuntu3.8) ...
+
+
+----
+------------------
+  - sudo docker build -t ardu_bridge . (Dockerfile basically unmodified from official besides deleting the entrypoint that soruces the terminal)
+  - sudo docker run -it --cap-add=SYS_PTRACE --privileged --network=host --pid=host --runtime=nvidia -v=/dev:/dev -v /usr/lib/aarch64-linux-gnu:/usr/lib/aarch64-linux-gnu -v /usr/lib/tegra:/usr/lib/tegra -v /usr/src:/usr/src --entrypoint=/bin/bash --rm --name=ardu_tof_bridge ardu_bridge:latest
+  - sudo docker run -it --cap-add=SYS_PTRACE --privileged --network=host --pid=host --runtime=nvidia -v=/dev:/dev -v=/var/lib/dpkg:/var/lib/dpkg:ro --entrypoint=/bin/bash --rm --name=ardu_tof_bridge ardu_tof_bridgev2:latest
+
+    - Start following this guide to install ROS2 Humble from source: https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html#id4
+    - Choose the Ubuntu 20.04 LTS option
+    - MAKE SURE NOT TO SOURCE NOETIC/Humble BEFORE BUILDING; To check: printenv | grep -i ROS
+      - To unset env variable: unset variable_name
+    - This takes A LOT of time when we colcon build, would recommend slimming this https://raw.githubusercontent.com/ros2/ros2/humble/ros2.repos down by removing rviz and other unneccesary packages
+      - AND I DID! Second time around, just download my ros2.repos into the ros2_humble folder (I just removed the visualizations, rviz, tutorials/examples, and rclpy (which I mention below))
+      - Then run this: "vcs import --input ros2.repos src" instead of the link to their page
+      - THERE IS A PROBLEM building rclpy. Simply colcon ignore it or use my .repos that already removed it: cd ~/ros2_humble/src/ros2/rclpy && touch COLCON_IGNORE
+  - For the Arducam: https://docs.arducam.com/Nvidia-Jetson-Camera/Time-of-Flight-Camera/ROS-With-Arducam-ToF-Camera/
+    - I had to sudo apt update && sudo apt apgrade and then sudo apt --fix-broken install the nvidia container [may not need to do this]
+    - Simply followed the online Arducam ToF guide:
+    - Make sure to source humble before colcon building
+    - source Arducam_tof_camera/ros2_publisher/install/setup.bash
+          - when running: ros2 run arducam tof_pointcloud
+
+
+geoclue geoclue 755 /var/lib/geoclue
+root crontab 2755 /usr/bin/crontab
+root ssl-cert 710 /etc/ssl/private
+root messagebus 4754 /usr/lib/dbus-1.0/dbus-daemon-launch-helper
+
