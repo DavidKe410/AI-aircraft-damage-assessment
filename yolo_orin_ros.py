@@ -59,9 +59,9 @@ class frame_process():
                     x, y, w, h = box
                     label = str(label)
                     id = str(track_id)
-                    x = str(x)
-                    y = str(y)
-                    point_data = label + id + x + y
+                    x = str(float(x))
+                    y = str(float(y))
+                    point_data = label + "," + id + "," + "," + x + "," + y
     
                     # Publish the tracking dictionary only with detections
                     self.coord_pub.publish(point_data)
