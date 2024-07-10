@@ -120,6 +120,8 @@ Starting the Orin development with Jetpack 5.1.2. Arducam doesn't with JP 5.1.3 
     - cd torchvision
     - git checkout v0.16.2
     - python3 setup.py install --user
+11. Making the middleman between the pixel coordinates Joe is giving and the 3d points that Elliott needs
+  - 
 
 
 
