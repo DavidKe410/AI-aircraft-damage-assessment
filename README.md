@@ -130,6 +130,14 @@ Starting the Orin development with Jetpack 5.1.2. Arducam doesn't with JP 5.1.3 
       - cd ~/Infrastructure_Setup && git clone https://github.com/norlab-ulaval/libpointmatcher.git
       - cd libpointmatcher &&
       - ros-$ROS_DISTRO-libpointmatcher
+     
+    - cd ~/Infrastructure_Setup && git clone https://github.com/introlab/rtabmap.git rtabmap
+    - cd rtabmap/build
+    - cmake ..  [<---double dots included]
+    - make -j6
+    - sudo make install
+    - cd ~/air_dmg_assesment_ws/ && git clone https://github.com/introlab/rtabmap_ros.git src/rtabmap_ros
+    - catkin_make -j4 -DRTABMAP_SYNC_USER_DATA=ON
 13. Making the middleman between the pixel coordinates Joe is giving and the 3d points that Elliott needs
   - 
 
