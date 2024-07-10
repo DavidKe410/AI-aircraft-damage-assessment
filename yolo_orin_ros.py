@@ -4,6 +4,7 @@ import json
 import torch
 import rospy
 from ultralytics import YOLO
+from cv_bridge import CvBridge
 from std_msgs.msg import String
 from sensor_msgs.msg import Image
 
@@ -27,7 +28,8 @@ class frame_process():
 
     # Loop through the video frames
     def frame_callback(self, frame):
-
+        bridge = CvBridge()
+        frame = cv_image = bridge.imgmsg_to_cv2(frame, desired_encoding='passthrough')
         # Create a dict that resets after each frame is received
         track_entry = {}
 
