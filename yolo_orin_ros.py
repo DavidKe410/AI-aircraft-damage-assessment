@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-import json
 import torch
 import rospy
 from ultralytics import YOLO
