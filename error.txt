@@ -1,0 +1,19 @@
+[ERROR] [1720644145.420020]: bad callback: <bound method frame_process.frame_callback of <__main__.frame_process object at 0xfffee304d070>>
+Traceback (most recent call last):
+  File "/opt/ros/noetic/lib/python3/dist-packages/rospy/topics.py", line 750, in _invoke_callback
+    cb(msg)
+  File "/home/orin/air_dmg_assesment_ws/src/yolo_ros/src/yolo_orin_ros.py", line 41, in frame_callback
+    results = model.track(frame, conf = 0.3, iou = 0.1, device = self.device, retina_masks = False, persist = True, tracker = '/home/orin/air_dmg_assesment_ws/src/yolo_ros/orin_run/bytetrack.yaml') #, classes = [0]) # Can set the model to track certain classes
+  File "/home/orin/.local/lib/python3.8/site-packages/ultralytics/engine/model.py", line 482, in track
+    return self.predict(source=source, stream=stream, **kwargs)
+  File "/home/orin/.local/lib/python3.8/site-packages/ultralytics/engine/model.py", line 442, in predict
+    return self.predictor.predict_cli(source=source) if is_cli else self.predictor(source=source, stream=stream)
+  File "/home/orin/.local/lib/python3.8/site-packages/ultralytics/engine/predictor.py", line 168, in __call__
+    return list(self.stream_inference(source, model, *args, **kwargs))  # merge list of Result into one
+  File "/home/orin/.local/lib/python3.8/site-packages/torch/utils/_contextlib.py", line 35, in generator_context
+    response = gen.send(None)
+  File "/home/orin/.local/lib/python3.8/site-packages/ultralytics/engine/predictor.py", line 250, in stream_inference
+    im = self.preprocess(im0s)
+  File "/home/orin/.local/lib/python3.8/site-packages/ultralytics/engine/predictor.py", line 125, in preprocess
+    im = im[..., ::-1].transpose((0, 3, 1, 2))  # BGR to RGB, BHWC to BCHW, (n, 3, h, w)
+ValueError: axes don't match array
