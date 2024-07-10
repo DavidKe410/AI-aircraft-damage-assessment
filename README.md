@@ -120,7 +120,17 @@ Starting the Orin development with Jetpack 5.1.2. Arducam doesn't with JP 5.1.3 
     - cd torchvision
     - git checkout v0.16.2
     - python3 setup.py install --user
-11. Making the middleman between the pixel coordinates Joe is giving and the 3d points that Elliott needs
+11. Getting the wifi back up again
+  - The downgrade from Jetpack 6 and Ubuntu 22.04 to Jetpack 5.1.2 and Ubuntu 20.04 may have removed our capability to use the wifi M.2 Board without major debugging. Instead, a wifi usb adapter was plugged in and after a little bit of trouble, worked.
+    - IvP6 was disabled. A driver was installed "driver=rtl8821cu driverversion=5.10.120-tegra".
+12. Installing RTAB Map and the ROS wrapper: https://github.com/introlab/rtabmap_ros
+  - Build from source:
+    - source ~/air_dmg_assesment_ws/devel/setup.bash && sudo apt install ros-$ROS_DISTRO-rtabmap*
+    - Then for the dependency libpoitnmatcher: https://github.com/norlab-ulaval/libpointmatcher?tab=readme-ov-file#quick-start
+      - cd ~/Infrastructure_Setup && git clone https://github.com/norlab-ulaval/libpointmatcher.git
+      - cd libpointmatcher &&
+      - ros-$ROS_DISTRO-libpointmatcher
+13. Making the middleman between the pixel coordinates Joe is giving and the 3d points that Elliott needs
   - 
 
 
