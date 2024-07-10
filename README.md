@@ -138,6 +138,8 @@ Starting the Orin development with Jetpack 5.1.2. Arducam doesn't with JP 5.1.3 
   - catkin_create_pkg yolo_ros sensor_msgs std_msgs rospy roscpp
   - download the yolo_orin_ros.py code into yolo_ros/src
   - For our example, we also moved the .pt model file into yolo_ros and redid the path within the code
+ 
+    
 1x. Making the middleman between the pixel coordinates Joe is giving and the 3d points that Elliott needs
   - Publishing:
       - a string of one point "x,y,z,label"
