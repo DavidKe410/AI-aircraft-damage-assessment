@@ -1,4 +1,4 @@
-#!/home/ashlynn/yolo_track_ros/.venv/bin/python3
+#!/usr/bin/env/ python3
 
 import json
 import torch
