@@ -8,8 +8,7 @@ from std_msgs.msg import String
 from sensor_msgs.msg import Image
 
 # Import a custom YOLO model
-model = YOLO("src/yolo_orin/src/yolov8l-seg.pt")
-model = YOLO("src/yolo_orin/src/IR_mod1.pt")
+model = YOLO("src/yolo_orin/src/best.pt")
 
 class frame_process():
     def __init__(self):
@@ -19,7 +18,8 @@ class frame_process():
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
         # Create a Subscriber to get the raw image, Create 2 Publishers to publish the annotated image and the pixel coordinates
-        self.frame_sub = rospy.Subscriber("/boson", callback = self.frame_callback, queue_size = 1)
+        self.frame_sub = rospy.Subscriber("/boso.
+        ", callback = self.frame_callback, queue_size = 1)
         self.frame_pub = rospy.Publisher("/annotated_frame", Image , queue_size = 1)
         self.coord_pub = rospy.Publisher("/coords", String , queue_size = 10)
 
