@@ -128,7 +128,7 @@ Starting the Orin development with Jetpack 5.1.2. Arducam doesn't with JP 5.1.3 
     - source ~/air_dmg_assesment_ws/devel/setup.bash && sudo apt install ros-$ROS_DISTRO-rtabmap*
     - cd ~/Infrastructure_Setup && git clone https://github.com/introlab/rtabmap.git rtabmap
     - cd rtabmap/build
-    - cmake ..  [<---double dots included]
+    - cmake .. 
     - make -j6
     - sudo make install
     - cd ~/air_dmg_assesment_ws/ && git clone https://github.com/introlab/rtabmap_ros.git src/rtabmap_ros
