@@ -126,14 +126,4 @@ Starting the Orin development with Jetpack 5.1.2. Arducam doesn't with JP 5.1.3 
 
 
 
-For script:
-
-Terminal 1: source ~/air_dmg_assesment_ws/devel/setup.bash && roslaunch flir_boson_usb flir_boson.launch dev:=/dev/video1 && rosparam load ~/ardu_tof_bridge_ws/src/ros1_bridge/bridge.yaml
-
-Terminal 2: source ~/air_dmg_assesment_ws/devel/setup.bash && roslaunch realsense2_camera rs_camera.launch enable_gyro:=true enable_accel:=true unite_imu_method:=linear_interpolation align_depth:=true 
-
-Terminal 3: source ardu_tof_bridge_ws/install/setup.bash && ros2 run arducam tof_pointcloud
-
-Terminal 4: source ardu_tof_bridge_ws/install/setup.bash && ros2 run ros1_bridge parameter_bridge
-
-Terminal 5 (if needed): source /opt/ros/noetic/setup.bash && rosrun tf static_transform_publisher 0 0 0.075 0.5 0.5 0.5 -0.5 sensor_frame camera_link 100
+Terminal (if needed): source /opt/ros/noetic/setup.bash && rosrun tf static_transform_publisher 0 0 0.075 0.5 0.5 0.5 -0.5 sensor_frame camera_link 100
