@@ -118,6 +118,12 @@ Terminal 4: source ardu_tof_bridge_ws/install/setup.bash && ros2 run ros1_bridge
 
 Random TF terminal: rosrun tf static_transform_publisher 0 0 0.075 0.5 0.5 0.5 -0.5 sensor_frame camera_link 100
 
+Trying to get the model YoloV8 running on the Orin with a Docker
+1. Follow this guide: https://docs.ultralytics.com/guides/nvidia-jetson/#run-on-jetpack-5x
+
+
+
+
 ------------------
   - sudo docker build -t ardu_bridge . (Dockerfile basically unmodified from official besides deleting the entrypoint that soruces the terminal)
   - sudo docker run -it --cap-add=SYS_PTRACE --privileged --network=host --pid=host --runtime=nvidia -v=/dev:/dev -v /usr/lib/aarch64-linux-gnu:/usr/lib/aarch64-linux-gnu -v /usr/lib/tegra:/usr/lib/tegra -v /usr/src:/usr/src --entrypoint=/bin/bash --rm --name=ardu_tof_bridge ardu_bridge:latest
