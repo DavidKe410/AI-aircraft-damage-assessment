@@ -18,7 +18,7 @@ class frame_process():
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
         # Create a Subscriber to get the raw image, Create 2 Publishers to publish the annotated image and the pixel coordinates
-        self.frame_sub = rospy.Subscriber("/flir_boson/image_raw", Image, callback = self.frame_callback, queue_size = 1)
+        self.frame_sub = rospy.Subscriber("/flir_boson/image_rect", Image, callback = self.frame_callback, queue_size = 1)
         self.frame_pub = rospy.Publisher("/annotated_frame", Image , queue_size = 1)
         self.coord_pub = rospy.Publisher("/coords", String , queue_size = 10)
 
