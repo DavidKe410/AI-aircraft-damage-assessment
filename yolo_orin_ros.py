@@ -3,7 +3,6 @@
 import cv2
 import torch
 import rospy
-import matplotlib.pyplot as plt
 from ultralytics import YOLO
 from cv_bridge import CvBridge
 from std_msgs.msg import String
@@ -29,7 +28,6 @@ class frame_process():
 
     # Loop through the video frames
     def frame_callback(self, frame):
-        rospy.loginfo(type(frame))
         bridge = CvBridge()
         frame = bridge.imgmsg_to_cv2(frame, desired_encoding='bgr8')
 
@@ -72,8 +70,7 @@ class frame_process():
                     self.coord_pub.publish(point_data)
 
             if count == 30:
-                plt.figure(figsize=(10, 10))
-                plt.imshow(annotated_image)
+                cv2.imshow(annotated_frame)
             # Convert the annotated frame to a ros Image
             processed_img = bridge.cv2_to_imgmsg(annotated_frame, encoding="bgr8")
             
