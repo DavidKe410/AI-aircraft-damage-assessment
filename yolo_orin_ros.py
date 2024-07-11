@@ -29,10 +29,9 @@ class frame_process():
 
     # Loop through the video frames
     def frame_callback(self, frame):
-        frame = rnp.numpify(frame)
-        # bridge = CvBridge()
-        # frame = bridge.imgmsg_to_cv2(frame, desired_encoding='rgb8')
-
+        bridge = CvBridge()
+        frame = bridge.imgmsg_to_cv2(frame, desired_encoding='passthrough')
+        print(frame)
         # Add 1 to the count to count frame number
         self.count = self.count + 1
         rospy.loginfo(self.count)
@@ -71,10 +70,9 @@ class frame_process():
                     # Publish the tracking dictionary only with detections
                     self.coord_pub.publish(point_data)
 
-                print(annotated_frame)
+                print("annotated frame", annotated_frame)
             # Convert the annotated frame to a ros Image
-            processed_img = rnp.msgify(annotated_frame)#, encoding='rgb8')
-            # processed_img = bridge.cv2_to_imgmsg(annotated_frame, encoding="passthrough")
+            processed_img = bridge.cv2_to_imgmsg(annotated_frame, encoding="passthrough")
             
             # Publish the frame regardless of detections
             self.frame_pub.publish(processed_img)
