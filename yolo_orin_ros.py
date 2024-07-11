@@ -29,7 +29,7 @@ class frame_process():
     # Loop through the video frames
     def frame_callback(self, frame):
         bridge = CvBridge()
-        frame = bridge.imgmsg_to_cv2(frame, desired_encoding='bgr8')
+        frame = bridge.imgmsg_to_cv2(frame, desired_encoding='rgb8')
 
         # Add 1 to the count to count frame number
         self.count = self.count + 1
@@ -72,7 +72,7 @@ class frame_process():
             if self.count == 30:
                 print(annotated_frame)
             # Convert the annotated frame to a ros Image
-            processed_img = bridge.cv2_to_imgmsg(annotated_frame, encoding="bgr8")
+            processed_img = bridge.cv2_to_imgmsg(annotated_frame, encoding="passthrough")
             
             # Publish the frame regardless of detections
             self.frame_pub.publish(processed_img)
