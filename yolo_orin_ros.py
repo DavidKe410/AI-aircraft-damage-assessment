@@ -68,7 +68,7 @@ class frame_process():
                     self.coord_pub.publish(point_data)
                     
             # Convert the annotated frame to a ros Image
-            processed_img = bridge.cv2_to_imgmsg(annotated_frame, encoding="passthrough")
+            processed_img = bridge.cv2_to_imgmsg(annotated_frame, encoding="mono8")
             
             # Publish the frame regardless of detections
             self.frame_pub.publish(processed_img)
