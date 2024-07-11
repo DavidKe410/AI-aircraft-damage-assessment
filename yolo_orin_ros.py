@@ -28,11 +28,13 @@ class frame_process():
 
     # Loop through the video frames
     def frame_callback(self, frame):
+        rospy.loginfo(type(frame))
         bridge = CvBridge()
         frame = bridge.imgmsg_to_cv2(frame, desired_encoding='rgb8')
 
         # Add 1 to the count to count frame number
         self.count = self.count + 1
+        rospy.loginfo(self.count)
 
         if self.count%30 == 0:
             # Run YOLOv8 tracking on the frame while persisting tracks between frames, adjust conf, iou, and other params
@@ -67,9 +69,7 @@ class frame_process():
     
                     # Publish the tracking dictionary only with detections
                     self.coord_pub.publish(point_data)
-
-            cv2.imshow("YOLOv8 Tracking", annotated_frame)
-            
+            rospy.loginfo(type(annotated_frame)
             # Convert the annotated frame to a ros Image
             processed_img = bridge.cv2_to_imgmsg(annotated_frame, encoding="passthrough")
             
