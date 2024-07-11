@@ -19,6 +19,7 @@ class frame_process():
 
         # Create a Subscriber to get the raw image, Create 2 Publishers to publish the annotated image and the pixel coordinates
         self.frame_sub = rospy.Subscriber("/flir_boson/image_rect", Image, callback = self.frame_callback, queue_size = 1)
+        self.frame_pub = rospy.Publisher("/annotated_frame", Image , queue_size = 10)
         self.coord_pub = rospy.Publisher("/coords", String , queue_size = 10)
 
         # Start a count for any intermittent processes that may need to be run (at certain frame numbers)
@@ -65,8 +66,13 @@ class frame_process():
     
                     # Publish the tracking dictionary only with detections
                     self.coord_pub.publish(point_data)
+                    
+            # Convert the annotated frame to a ros Image
+            processed_img = bridge.cv2_to_imgmsg(annotated_frame, encoding="passthrough")
             
-
+            # Publish the frame regardless of detections
+            self.frame_pub.publish(processed_img)
+            
 if __name__ == '__main__': 
     rospy.init_node('frame_process') 
     f = frame_process() 
