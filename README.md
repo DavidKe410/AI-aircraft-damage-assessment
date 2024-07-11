@@ -140,6 +140,7 @@ Starting the Orin development with Jetpack 5.1.2. Arducam doesn't with JP 5.1.3 
   - For our example, we also moved the .pt model file into yolo_ros and redid the path within the code
 1x. Making the middleman between the pixel coordinates Joe is giving and the 3d points that Elliott needs
   - To do this we will make use of the image_pipline ros package, specifically the imag-proc and depth-image-proc parts of it
+  - ROS_NAMESPACE=arducam_tof rosrun image_proc image_proc
   - cd ~/air_dmg_assesment_ws/src
   - Publishing:
       - a string of one point "x,y,z,label"
@@ -148,11 +149,13 @@ Starting the Orin development with Jetpack 5.1.2. Arducam doesn't with JP 5.1.3 
       - json.load
     - To Arducam's depth_frame or 
       - 
-sudo apt install ros-noetic-depth-image*
-sudo apt install ros-galactic-depth-image-proc*
+ros2 run image_view image_view --ros-args -r image:=/arducam_tof/image_raw
 
+ROS_NAMESPACE=arducam_tof rosrun image_proc image_proc
 
+roslaunch depth_image_proc registerImgDepth.launch
 source /opt/ros/galactic/setup.bash
 sudo chmod +x register.launch.py convert_metric.launch.py 
 
 Terminal (if needed): source /opt/ros/noetic/setup.bash && rosrun tf static_transform_publisher 0 0 0.075 0.5 0.5 0.5 -0.5 sensor_frame camera_link 100
+Calibrating a Tof: https://link.springer.com/chapter/10.1007/978-3-319-16178-5_29
