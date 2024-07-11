@@ -30,7 +30,7 @@ class frame_process():
     # Loop through the video frames
     def frame_callback(self, frame):
         bridge = CvBridge()
-        frame = bridge.imgmsg_to_cv2(frame, desired_encoding='passthrough')
+        frame = bridge.imgmsg_to_cv2(frame, desired_encoding='rgb8')
         print(frame)
         # Add 1 to the count to count frame number
         self.count = self.count + 1
