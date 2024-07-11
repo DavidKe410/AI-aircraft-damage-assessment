@@ -69,9 +69,8 @@ class frame_process():
     
                     # Publish the tracking dictionary only with detections
                     self.coord_pub.publish(point_data)
-            rospy.loginfo(type(annotated_frame)
             # Convert the annotated frame to a ros Image
-            processed_img = bridge.cv2_to_imgmsg(annotated_frame, encoding="passthrough")
+            processed_img = bridge.cv2_to_imgmsg(annotated_frame, encoding="bgr8")
             
             # Publish the frame regardless of detections
             self.frame_pub.publish(processed_img)
