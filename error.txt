@@ -1,11 +1,61 @@
-0: 512x640 (no detections), 16.5ms
-Speed: 2.3ms preprocess, 16.5ms inference, 0.9ms postprocess per image at shape (1, 3, 512, 640)
-[ERROR] [1720674431.720506]: bad callback: <bound method frame_process.frame_callback of <__main__.frame_process object at 0xfffeefa5a070>>
-Traceback (most recent call last):
-  File "/opt/ros/noetic/lib/python3/dist-packages/rospy/topics.py", line 750, in _invoke_callback
-    cb(msg)
-  File "/home/orin/air_dmg_assesment_ws/src/yolo_ros/src/yolo_orin_ros.py", line 71, in frame_callback
-    processed_img = bridge.cv2_to_imgmsg(annotated_frame, encoding="mono8")
-  File "/opt/ros/noetic/lib/python3/dist-packages/cv_bridge/core.py", line 267, in cv2_to_imgmsg
-    raise CvBridgeError("encoding specified as %s, but image has incompatible type %s" % (encoding, cv_type))
-cv_bridge.core.CvBridgeError: encoding specified as mono8, but image has incompatible type 8UC3
+[INFO] [1720678513.660245]: started
+[INFO] [1720678513.722042]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678513.726388]: 1
+[INFO] [1720678513.728888]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678513.730923]: 2
+[INFO] [1720678513.747642]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678513.751055]: 3
+[INFO] [1720678513.755851]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678513.758225]: 4
+[INFO] [1720678513.783839]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678513.786813]: 5
+[INFO] [1720678513.791032]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678513.793318]: 6
+[INFO] [1720678513.814893]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678513.819278]: 7
+[INFO] [1720678513.823143]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678513.825189]: 8
+[INFO] [1720678513.847679]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678513.854410]: 9
+[INFO] [1720678513.856688]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678513.858782]: 10
+[INFO] [1720678513.881187]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678513.889194]: 11
+[INFO] [1720678513.892293]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678513.895298]: 12
+[INFO] [1720678513.914049]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678513.922384]: 13
+[INFO] [1720678513.925639]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678513.929033]: 14
+[INFO] [1720678513.947154]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678513.950720]: 15
+[INFO] [1720678513.954636]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678513.957016]: 16
+[INFO] [1720678513.980435]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678513.983472]: 17
+[INFO] [1720678513.988097]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678513.990680]: 18
+[INFO] [1720678514.013737]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678514.016838]: 19
+[INFO] [1720678514.021402]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678514.023952]: 20
+[INFO] [1720678514.047129]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678514.050853]: 21
+[INFO] [1720678514.055352]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678514.061820]: 22
+[INFO] [1720678514.080456]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678514.083984]: 23
+[INFO] [1720678514.091510]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678514.095429]: 24
+[INFO] [1720678514.113852]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678514.117136]: 25
+[INFO] [1720678514.125326]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678514.128932]: 26
+[INFO] [1720678514.147034]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678514.150252]: 27
+[INFO] [1720678514.158772]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678514.161197]: 28
+[INFO] [1720678514.189820]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678514.193518]: 29
+[INFO] [1720678514.196232]: <class 'sensor_msgs.msg._Image.Image'>
+[INFO] [1720678514.198806]: 30
