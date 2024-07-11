@@ -69,7 +69,7 @@ class frame_process():
                     # Publish the tracking dictionary only with detections
                     self.coord_pub.publish(point_data)
 
-            if count == 30:
+            if self.count == 30:
                 cv2.imshow(annotated_frame)
                 print(annotated_frame)
             # Convert the annotated frame to a ros Image
