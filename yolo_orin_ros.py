@@ -34,7 +34,7 @@ class frame_process():
         # Add 1 to the count to count frame number
         self.count = self.count + 1
 
-        if self.count%3 == 0:
+        if self.count%30 == 0:
             # Run YOLOv8 tracking on the frame while persisting tracks between frames, adjust conf, iou, and other params
             results = model.track(frame, conf = 0.3, iou = 0.1, device = self.device, retina_masks = False, persist = True, tracker = '/home/orin/air_dmg_assesment_ws/src/yolo_ros/orin_run/bytetrack.yaml') #, classes = [0]) # Can set the model to track certain classes
             
