@@ -64,13 +64,12 @@ class frame_process():
                     id = str(track_id)
                     x = str(float(x))
                     y = str(float(y))
-                    point_data = label + "," + id + "," + "," + x + "," + y
+                    point_data = label + "," + id + "," + x + "," + y
     
                     # Publish the tracking dictionary only with detections
                     self.coord_pub.publish(point_data)
 
             if self.count == 30:
-                cv2.imshow(annotated_frame)
                 print(annotated_frame)
             # Convert the annotated frame to a ros Image
             processed_img = bridge.cv2_to_imgmsg(annotated_frame, encoding="bgr8")
