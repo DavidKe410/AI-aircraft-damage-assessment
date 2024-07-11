@@ -1,1 +1,11 @@
-data: "shrapnel damage1tensor(530.1959, device='cuda:0')tensor(241.5337, device='cuda:0')"
+0: 512x640 (no detections), 16.5ms
+Speed: 2.3ms preprocess, 16.5ms inference, 0.9ms postprocess per image at shape (1, 3, 512, 640)
+[ERROR] [1720674431.720506]: bad callback: <bound method frame_process.frame_callback of <__main__.frame_process object at 0xfffeefa5a070>>
+Traceback (most recent call last):
+  File "/opt/ros/noetic/lib/python3/dist-packages/rospy/topics.py", line 750, in _invoke_callback
+    cb(msg)
+  File "/home/orin/air_dmg_assesment_ws/src/yolo_ros/src/yolo_orin_ros.py", line 71, in frame_callback
+    processed_img = bridge.cv2_to_imgmsg(annotated_frame, encoding="mono8")
+  File "/opt/ros/noetic/lib/python3/dist-packages/cv_bridge/core.py", line 267, in cv2_to_imgmsg
+    raise CvBridgeError("encoding specified as %s, but image has incompatible type %s" % (encoding, cv_type))
+cv_bridge.core.CvBridgeError: encoding specified as mono8, but image has incompatible type 8UC3
