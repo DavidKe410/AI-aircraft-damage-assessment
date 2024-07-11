@@ -3,6 +3,7 @@
 import cv2
 import torch
 import rospy
+import matplotlib.pyplot as plt
 from ultralytics import YOLO
 from cv_bridge import CvBridge
 from std_msgs.msg import String
@@ -30,7 +31,7 @@ class frame_process():
     def frame_callback(self, frame):
         rospy.loginfo(type(frame))
         bridge = CvBridge()
-        frame = bridge.imgmsg_to_cv2(frame, desired_encoding='rgb8')
+        frame = bridge.imgmsg_to_cv2(frame, desired_encoding='bgr8')
 
         # Add 1 to the count to count frame number
         self.count = self.count + 1
@@ -69,8 +70,12 @@ class frame_process():
     
                     # Publish the tracking dictionary only with detections
                     self.coord_pub.publish(point_data)
+
+            if count == 30:
+                plt.figure(figsize=(10, 10))
+                plt.imshow(annotated_image)
             # Convert the annotated frame to a ros Image
-            processed_img = bridge.cv2_to_imgmsg(annotated_frame, encoding="rgb8")
+            processed_img = bridge.cv2_to_imgmsg(annotated_frame, encoding="bgr8")
             
             # Publish the frame regardless of detections
             self.frame_pub.publish(processed_img)
