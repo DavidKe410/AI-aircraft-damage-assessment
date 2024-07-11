@@ -1,3 +1,18 @@
+header: 
+  seq: 158
+  stamp: 
+    secs: 0
+    nsecs:         0
+  frame_id: ''
+height: 512
+width: 640
+encoding: "rgb8"
+is_bigendian: 0
+step: 1920
+data: "<array type: uint8, length: 983040>"
+
+
+
 [INFO] [1720678513.660245]: started
 [INFO] [1720678513.722042]: <class 'sensor_msgs.msg._Image.Image'>
 [INFO] [1720678513.726388]: 1
