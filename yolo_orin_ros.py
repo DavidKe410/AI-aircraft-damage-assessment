@@ -71,6 +71,7 @@ class frame_process():
 
             if count == 30:
                 cv2.imshow(annotated_frame)
+                print(annotated_frame)
             # Convert the annotated frame to a ros Image
             processed_img = bridge.cv2_to_imgmsg(annotated_frame, encoding="bgr8")
             
