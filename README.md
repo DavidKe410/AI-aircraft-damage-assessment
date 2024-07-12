@@ -1,6 +1,38 @@
 # AI-aircraft-damage-assesment
 Using machine learning to supplement aircraft damage assesments, inparticular with battle damage like bullet holes and shrapnel
 
+# Elliott's Work
+
+Here are the flight launch instructions while SSHed into the Orin onboard computer:
+
+Terminal 1:
+cd flight_folder/new_ws
+sudo su
+source ~/.bashrc
+source devel/setup.bash
+roslaunch reef_adaptive_control setpoint_control.launch
+
+Terminal 2:
+cd flight_folder/new_ws
+source ~/.bashrc
+source devel/setup.bash
+source devel/setup.bash
+rosparam set /setpoint_publisher/active true
+
+Terminal 3:
+cd air_dmg_assessment_ws
+source devel/setup.bash
+roslaunch ABDA d435i_kmetz.launch
+
+Terminal 4 
+cd air_dmg_assessment_ws/src/ABDA
+rosbag record /camera/color/image_raw /camera/aligned_depth_to_color/image_raw /camera/color/camera_info /rtabmap/imu /rtabmap/cloud_map /rtabmap/odom /ml_points /flir_boson/image_rect /flir_boson/camera_info /coords /annotated_frame -O csrp_1.bag
+
+Here is the visualization command to run on your device: (DO NOT RUN THIS ON THE ORIN) The csrp.rviz is uploaded in this directory.
+rosrun rviz rviz -d path/to/csrp.rviz
+
+
+# David's Work Down Below
 Starting the Orin development with Jetpack 5.1.2. Arducam doesn't with JP 5.1.3 and Realsense is very annoying with JP6 due to kernal + HID issues:
 1. Installed a new NVMe drive
 2. Used Nvidia's sdkmanager on another Ubuntu amd64 computer to flash and install runtime/sdk components to the Orin. (Jetpack 5.1.2 w/ all runtime and sdk components installed)
