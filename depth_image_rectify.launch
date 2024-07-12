@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!-- Launch in the camera namespace containing "image_raw" and "camera_info" -->
+<launch>
+  <arg name="namespace" default="arducam_tof"/>
+  <arg name="camera" default="arducam" />
+  <arg name="manager" default="$(arg camera)_nodelet_manager"/> <!-- Must be globally qualified -->
+  <arg name="respawn" default="false" />
+  <!-- TODO Arguments for debayer, interpolation methods? -->
+
+  <arg     if="$(arg respawn)" name="bond" value="" />
+  <arg unless="$(arg respawn)" name="bond" value="--no-bond" />
+
+  <group ns="$(arg namespace)">
+    <!-- Start the nodelet manager -->
+    <node pkg="nodelet" type="nodelet" name="$(arg manager)" args="manager" output="screen" />
+
+    <!-- Rectify depth images -->
+    <node pkg="nodelet" type="nodelet" name="rectify_depth"
+          args="load image_proc/rectify $(arg manager) $(arg bond)"
+    respawn="$(arg respawn)">
+      <remap from="image_mono" to="image_raw" />
+      <remap from="camera_info" to="camera_info" />
+    </node>
+  </group>
+</launch>
