@@ -3,6 +3,16 @@ Using machine learning to supplement aircraft damage assesments, inparticular wi
 
 # Elliott's Work
 
+This is the error occuring when it is trying to use the rtabmap_ml_uniter.py:  I can't use split apparently with the string :(
+[ERROR] [1720796320.323112]: bad callback: <bound method Uniter.importpixelmap of <__main__.Uniter object at 0xffff9eac7760>>
+Traceback (most recent call last):
+  File "/opt/ros/noetic/lib/python3/dist-packages/rospy/topics.py", line 750, in _invoke_callback
+    cb(msg)
+  File "/home/orin/air_dmg_assesment_ws/src/ABDA/scripts/rtabmap_ml_unite.py", line 77, in importpixelmap
+    self.pixel_map = pixel_map.split(",")
+AttributeError: 'String' object has no attribute 'split'
+
+
 Here are the flight launch instructions while SSHed into the Orin onboard computer:
 
 Terminal 1:
