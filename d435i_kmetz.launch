@@ -33,7 +33,7 @@
     </node>
 
     <!-- Include the launch file for FLIR Boson USB -->
-    <include file="$(find flir_boson_usb)/launch/flir_boson_rectified.launch">
+    <include file="$(find flir_boson_usb)/launch/flir_boson.launch">
         <arg name="dev" value="/dev/video1" />
     </include>
 
