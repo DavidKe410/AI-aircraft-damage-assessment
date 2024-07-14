@@ -1,6 +1,6 @@
-image_width: 640
-image_height: 512
-camera_name: Boson640
+image_width: 240
+image_height: 180
+camera_name: ArducamToF
 camera_matrix:
   rows: 3
   cols: 3
@@ -9,7 +9,7 @@ distortion_model: plumb_bob
 distortion_coefficients:
   rows: 1
   cols: 5
-  data: [-0.504042, 0.268940, 0.003454, -0.000748, 0.000000]
+  data: [0.000000, 0.000000, 0.000000, 0.000000, 0.000000]
 rectification_matrix:
   rows: 3
   cols: 3
