@@ -141,7 +141,7 @@ Starting the Orin development with Jetpack 5.1.2. Arducam doesn't with JP 5.1.3 
  
 
 remove ROS's version of depth_image_proc, the register node is not built correctly. Download included depth_image_proc package
-
+ros2 run tf2_ros static_transform_publisher 0 0 0.001 0 0 0 boson_camera ardu_tof_frame
 
 1x. Making the middleman between the pixel coordinates Joe is giving and the 3d points that Elliott needs
   - To do this we will make use of the image_pipline ros package, specifically the imag-proc and depth-image-proc parts of it
