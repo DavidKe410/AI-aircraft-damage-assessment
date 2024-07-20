@@ -159,11 +159,7 @@ DEPTH_IMAG_PROC REFUSES TO WORK ROS1 OR ROS2 OR JUST STRAIGHT UP PACKAGE. alwasy
       - 
 ros2 run image_view image_view --ros-args -r image:=/arducam_tof/image_raw
 
-ROS_NAMESPACE=arducam_tof rosrun image_proc image_proc
 
-roslaunch depth_image_proc registerImgDepth.launch
-source /opt/ros/galactic/setup.bash
-sudo chmod +x register.launch.py convert_metric.launch.py 
 
-Terminal (if needed): source /opt/ros/noetic/setup.bash && rosrun tf static_transform_publisher 0 0 0.075 0.5 0.5 0.5 -0.5 sensor_frame camera_link 100
+Resource about camera intrinsics and extrinsics: https://towardsdatascience.com/what-are-intrinsic-and-extrinsic-camera-parameters-in-computer-vision-7071b72fb8ec
 Calibrating a Tof: https://link.springer.com/chapter/10.1007/978-3-319-16178-5_29
