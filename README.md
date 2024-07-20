@@ -138,7 +138,7 @@ Starting the Orin development with Jetpack 5.1.2. Arducam doesn't with JP 5.1.3 
   - catkin_create_pkg yolo_ros sensor_msgs std_msgs rospy roscpp
   - download the yolo_orin_ros.py code into yolo_ros/src
   - For our example, we also moved the .pt model file into yolo_ros and redid the path within the code
- 
+ https://www.mathworks.com/help/vision/ug/camera-calibration.html
 
 remove ROS's version of depth_image_proc, the register node is not built correctly. Download included depth_image_proc package
 ros2 run tf2_ros static_transform_publisher 0 0 0.001 0 0 0 boson_camera ardu_tof_frame
@@ -162,4 +162,6 @@ ros2 run image_view image_view --ros-args -r image:=/arducam_tof/image_raw
 
 
 Resource about camera intrinsics and extrinsics: https://towardsdatascience.com/what-are-intrinsic-and-extrinsic-camera-parameters-in-computer-vision-7071b72fb8ec
+https://cvgl.stanford.edu/teaching/cs231a_winter1415/lecture/lecture3_camera_calibration_notes.pdf
+https://www.mathworks.com/help/vision/ug/camera-calibration.html
 Calibrating a Tof: https://link.springer.com/chapter/10.1007/978-3-319-16178-5_29
