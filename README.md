@@ -159,7 +159,9 @@ DEPTH_IMAG_PROC REFUSES TO WORK ROS1 OR ROS2 OR JUST STRAIGHT UP PACKAGE. alwasy
       - 
 ros2 run image_view image_view --ros-args -r image:=/arducam_tof/image_raw
 
-
+15. To identify the FLIR Boson device when its plugged in and not have to guess at which /dev/video# it is, we will be adding a Udev rule to create a symlink for the device.
+  - udevadm info --query=all --name=/dev/video# | grep -E "ID_SERIAL|ID_VENDOR|ID_MODEL"
+    - This gave me 
 
 Resource about camera intrinsics and extrinsics: https://towardsdatascience.com/what-are-intrinsic-and-extrinsic-camera-parameters-in-computer-vision-7071b72fb8ec
 https://cvgl.stanford.edu/teaching/cs231a_winter1415/lecture/lecture3_camera_calibration_notes.pdf
