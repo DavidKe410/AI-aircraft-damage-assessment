@@ -163,6 +163,9 @@ ros2 run image_view image_view --ros-args -r image:=/arducam_tof/image_raw
   - udevadm info --query=all --name=/dev/video# | grep -E "ID_SERIAL|ID_VENDOR|ID_MODEL"
     - This gave me 
 
+
+SUBSYSTEMS=="usb", DRIVERS=="uvcvideo", KERNELS=="1-2.2:1.0", ATTRS{bInterfaceClass}=="0e",ATTRS{interface}=="FLIR Camera", SYMLINK+="flir_boson"
+
 Resource about camera intrinsics and extrinsics: https://towardsdatascience.com/what-are-intrinsic-and-extrinsic-camera-parameters-in-computer-vision-7071b72fb8ec
 https://cvgl.stanford.edu/teaching/cs231a_winter1415/lecture/lecture3_camera_calibration_notes.pdf
 https://www.mathworks.com/help/vision/ug/camera-calibration.html
