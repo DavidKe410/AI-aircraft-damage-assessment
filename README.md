@@ -159,9 +159,10 @@ DEPTH_IMAG_PROC REFUSES TO WORK ROS1 OR ROS2 OR JUST STRAIGHT UP PACKAGE. alwasy
       - 
 ros2 run image_view image_view --ros-args -r image:=/arducam_tof/image_raw
 
-15. To identify the FLIR Boson device when its plugged in and not have to guess at which /dev/video# it is, we will be adding a Udev rule to create a symlink for the device.
-  - udevadm info --query=all --name=/dev/video# | grep -E "ID_SERIAL|ID_VENDOR|ID_MODEL"
-    - This gave me 
+15. To identify the FLIR Boson device when its plugged in and not have to guess at which /dev/video# it is, simply cd /dev/v4l/by-id/ and see if it already has created a unique ID for the device (https://askubuntu.com/questions/715333/assign-webcam-to-a-specific-dev-video)
+  - for the flir, there were unique IDs already: usb-FLIR_Boson_36304-video-index0 and usb-FLIR_Boson_36304-video-index1
+  - I just switched the /dev/video1 to the first unique ID: /dev/v4l/usb-FLIR_Boson_36304-video-index0
+    - And this worked! I can swtich the usb port and what order without consequence
 
 
 SUBSYSTEMS=="usb", DRIVERS=="uvcvideo", KERNELS=="1-2.2:1.0", ATTRS{bInterfaceClass}=="0e",ATTRS{interface}=="FLIR Camera", SYMLINK+="flir_boson"
