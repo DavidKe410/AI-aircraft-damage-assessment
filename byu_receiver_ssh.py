@@ -13,7 +13,8 @@ import datetime as date
 import RANSAC as RS  # import the RANSAC code
 from Parameters import *
 
-ser = serial.Serial("COM12", 115200, timeout=3)
+# Update the serial port for Ubuntu
+ser = serial.Serial("/dev/ttyUSB0", 115200, timeout=3)
 
 # Delimiters:
 # Data is transmitted in the form ###c###p###c###l###c###p###c###
@@ -83,20 +84,20 @@ finally:
 
     # Save the data
     now = date.datetime.now()
-    test_dir = os.getcwd() + "\\Tests\\" + str(now.month) + "-" + str(now.day) + "-" + str(now.year) + " " + str(now.hour) + "-" + str(now.minute) + "-" + str(now.second)
+    test_dir = os.getcwd() + "/Tests/" + str(now.month) + "-" + str(now.day) + "-" + str(now.year) + " " + str(now.hour) + "-" + str(now.minute) + "-" + str(now.second)
     os.mkdir(test_dir)
 
     segments_df = pd.DataFrame(columns=["x1", "y1", "x2", "y2"])
     for s in segments:
         segments_df.loc[len(segments_df)] = list(np.concatenate(s, axis=0), )
-    segments_df.to_csv(test_dir+"\\Segments.csv")
+    segments_df.to_csv(test_dir+"/Segments.csv")
 
     point_df = pd.DataFrame(columns=["x", "y"])
 
     for p in all_points:
         point_df.loc[len(point_df)] = list(p)
 
-    point_df.to_csv(test_dir+"\\Points.csv")
+    point_df.to_csv(test_dir+"/Points.csv")
 
     # Save the figure as a svg
 
@@ -109,7 +110,7 @@ finally:
     plt.scatter(ap[:, 1], ap[:, 0])
 
     fig = plt.gcf()
-    fig.savefig(test_dir + "\\figure.pdf", format="pdf")
+    fig.savefig(test_dir + "/figure.pdf", format="pdf")
 
     # Save the plot instead of showing it
     plt.close(fig)
