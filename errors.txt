@@ -1,0 +1,10 @@
+Unable to init server: Could not connect: Connection refused
+Unable to init server: Could not connect: Connection refused
+
+(byu_receiver_ssh.py:2838): Gdk-CRITICAL **: 23:52:07.180: gdk_cursor_new_for_display: assertion 'GDK_IS_DISPLAY (display)' failed
+Starting
+^CStopped
+Traceback (most recent call last):
+  File "byu_receiver_ssh.py", line 126, in <module>
+    os.mkdir(test_dir)
+FileNotFoundError: [Errno 2] No such file or directory: '/home/odroid/AFA-BYU_Capstone/filter_development/Tests/7-29-2024 23-52-31'
