@@ -14,7 +14,7 @@ import RANSAC as RS  # Import the RANSAC code
 from Parameters import *
 
 # Change the serial port configuration for Linux
-ser = serial.Serial("/dev/ttyUSB0", 115200, timeout=3)
+ser = serial.Serial("/dev/ttyACM2", 115200, timeout=3)
 
 # Delimiters:
 # Data is transmitted in the form ###c###p###c###l###c###p###c###
@@ -34,6 +34,7 @@ left_bank = []
 all_points = []
 # Create empty lists for RANSAC output
 segments = []
+
 
 def parse_points(line):
     '''Take the raw line from a request and convert it into a list of points'''
@@ -75,7 +76,7 @@ try:
             # Parse the points
             points = parse_points(line)
 
-            # Allocate points to banks
+ # Allocate points to banks
             for p in points:
                 if p[1] < 0:
                     right_new.append(p)
@@ -122,7 +123,7 @@ except KeyboardInterrupt:
 
 # Save the data
 now = date.datetime.now()
-test_dir = os.path.join(os.getcwd(), "Tests", f"{now.month}-{now.day}-{now.year} {now.hour}-{now.minute}-{now.second}")
+test_dir = os.path.join(os.getcwd(), "Tests", f"{now.month}-{now.day}-{now.year}_{now.hour}-{now.minute}-{now.second}")
 os.mkdir(test_dir)
 
 segments_df = pd.DataFrame(columns=["x1", "y1", "x2", "y2"])
@@ -144,3 +145,4 @@ point_df.to_csv(os.path.join(test_dir, "Points.csv"))
 # fig = plt.gcf()
 # fig.savefig(os.path.join(test_dir, "figure.pdf"), format="pdf")
 # plt.show()
+
