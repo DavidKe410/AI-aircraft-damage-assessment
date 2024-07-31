@@ -9,34 +9,31 @@ from std_msgs.msg import String
 # Initialize the node
 rospy.init_node('localization_node')
 
-# Configure the serial connection
-DWM = serial.Serial(port="/dev/ttyACM1", baudrate=115200)
-print("Connected to " + DWM.name)
-DWM.write("\r\r".encode())
-print("Encode")
-time.sleep(1)
-DWM.write("lec\r".encode())
-print("Encode")
-time.sleep(1)
-
-
-# Open a CSV file to save data
-# csv_file = open('rapid_localization_data.csv', mode='w', newline='')
-# fieldnames = ['Time', 'Type', 'Anchor_Count', 'Anchor_Data', 'Tag_Position']
-# writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-# writer.writeheader()
-
 # Create a publisher for the localization data
 localization_pub = rospy.Publisher('localization_data', String, queue_size=10)
+
+def connect_serial():
+    try:
+        DWM = serial.Serial(port="/dev/ttyACM1", baudrate=115200)
+        rospy.loginfo("Connected to " + DWM.name)
+        DWM.write("\r\r".encode())
+        print("Encode 1")
+        time.sleep(1)
+        DWM.write("lec\r".encode())
+        print("Encode 2")
+        time.sleep(1)
+    except serial.SerialException as e:
+        rospy.logerr(f"Failed to connect to serial port: {e}")
+        DWM = None
+    return DWM
+
+# Configure the serial connection
+DWM = connect_serial()
+
 def shutdown():
     # Close the serial connection
     DWM.write("\r".encode())
     DWM.close()
-
-    # print("Serial connection closed")
-    # Close the CSV file
-    # csv_file.close()
-    # print("CSV file closed")
     rospy.loginfo("Serial connection closed")
 
 def parse_data(data):
@@ -72,18 +69,28 @@ def parse_data(data):
                 'Anchor_Data': json.dumps(anchor_data),
                 'Tag_Position': json.dumps(tag_position)
             }
+            localization_pub.publish(json.dumps(row))
+    return
 
 def main():
     rospy.on_shutdown(shutdown)
     while not rospy.is_shutdown():
-        data = DWM.readline()
-        if data:
-            row=parse_data(data)
-            # Publish the data
-            localization_pub.publish(json.dumps(row))
-
-            # For saving to a csv file
-            # writer.writerow(row)
+        if DWM is None or not DWM.is_open:
+            DWM = connect_serial()
+            if DWM is None:
+                rospy.logerr("Reconnection failed, retrying...")
+                time.sleep(1)
+                continue
+        try:
+            data = DWM.readline()
+            if data:
+                parse_data(data)
+        except serial.SerialException as e:
+            rospy.logerr(f"Serial Exception: {e}")
+            DWM.close()
+            DWM = None
+        except Exception as e:
+            rospy.logerr(f"Unexpected Exception: {e}")
 
 if __name__ == "__main__":
     main()
