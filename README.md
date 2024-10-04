@@ -1,4 +1,4 @@
-# AI-aircraft-damage-assesment
+# AI-aircraft-damage-assessment
 Using machine learning to supplement aircraft damage assesments, inparticular with battle damage like bullet holes and shrapnel
 
 Starting the Orin development with Jetpack 5.1.2. Arducam doesn't with JP 5.1.3 and Realsense is very annoying with JP6 due to kernal + HID issues:
